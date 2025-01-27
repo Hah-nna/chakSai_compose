@@ -2,33 +2,68 @@ package com.jeong.sesac.chaksaicompose.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.jeong.sesac.chaksaicompose.R
 
-// Set of Material typography styles to start with
-val Typography = Typography(
-    bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
-    )
-    /* Other default text styles to override
+const val lineHeightPercentage = 1.5f
+
+val pretendardFontFamily = FontFamily(
+    Font(R.font.pretendard, FontWeight.Normal)
+)
+
+val AppTypography = Typography(
     titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
+        fontFamily = pretendardFontFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 20.sp,
+        lineHeight = 20.sp * lineHeightPercentage
+    ),
+    titleMedium = TextStyle(
+        fontFamily = pretendardFontFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 18.sp,
+        lineHeight = 18.sp * lineHeightPercentage
+    ),
+    titleSmall = TextStyle(
+        fontFamily = pretendardFontFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 14.sp,
+        lineHeight = 14.sp * lineHeightPercentage
+    ),
+    // button
+    labelLarge = TextStyle(
+        fontFamily = pretendardFontFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 18.sp,
+    ),
+    labelMedium = TextStyle(
+        fontFamily = pretendardFontFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 16.sp,
     ),
     labelSmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp
-    )
-    */
+        fontFamily = pretendardFontFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 14.sp,
+    ),
+    // body
+    bodyLarge = TextStyle(
+        fontFamily = pretendardFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 18.sp,
+        lineHeight = 18.sp * lineHeightPercentage
+    ),
+    bodyMedium = TextStyle(
+        fontFamily = pretendardFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+    ),
+    bodySmall = TextStyle(
+        fontFamily = pretendardFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 10.sp,
+    ),
 )
