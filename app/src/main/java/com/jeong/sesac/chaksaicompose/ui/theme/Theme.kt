@@ -12,25 +12,39 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = YellowDark100,
+    secondary = YellowDark200,
+    tertiary = GreenDark100,
+    outline = YellowDark600,
+    outlineVariant = Yellow800,
+    surface = YellowDark500,
+    surfaceDim = Yellow200,
+    error =Red100 ,
+    onError = White,
+    errorContainer = Red200,
+    scrim = Black,
+    primaryContainer = YellowDark300,
+    secondaryContainer = YellowDark400,
+    tertiaryContainer = GreenDark200
+
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = Yellow300,
+    secondary = Yellow400,
+    tertiary = Green100,
+    outline = Yellow700,
+    outlineVariant = YellowDark700,
+    surface = Yellow100,
+    surfaceDim = YellowDark500,
+    error = Red300,
+    onError = BlackText,
+    errorContainer = Red400,
+    scrim = Black,
+    primaryContainer = Yellow500,
+    secondaryContainer =Yellow600,
+    tertiaryContainer = Green200
 
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
 )
 
 @Composable
@@ -52,7 +66,7 @@ fun ChakSaiComposeTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = AppTypography,
         content = content
     )
 }
