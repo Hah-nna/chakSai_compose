@@ -6,20 +6,25 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.jeong.sesac.chaksaicompose.R
 import com.jeong.sesac.chaksaicompose.nav_graph.BottomNavigationItem
 import com.jeong.sesac.chaksaicompose.nav_graph.ScreenRoutes
 import com.jeong.sesac.chaksaicompose.nav_graph.commonNoteDetailNavGraph
@@ -53,15 +58,17 @@ fun MainEntryScreen() {
                             label = {
                                 Text(
                                     text = navItem.tabName,
-                                    color = Color.Gray
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.Thin,
+
                                 )
                             },
                             icon = {
                                 Icon(
                                     painter = painterResource(id = navItem.icon),
                                     contentDescription = navItem.tabName,
-                                    modifier = Modifier.size(24.dp),
-                                    tint = Color.Gray
+                                    modifier = Modifier.size(20.dp),
+
                                 )
                             },
                             onClick = {
@@ -72,7 +79,15 @@ fun MainEntryScreen() {
                                     launchSingleTop = true
                                     restoreState = true
                                 }
-                            }
+                            },
+                            colors = NavigationBarItemDefaults.colors(
+                                selectedIconColor = Color.Black,
+                                selectedTextColor = Color.Black,
+                                indicatorColor = Color.Transparent,
+                                unselectedIconColor = Color.Gray,
+                                unselectedTextColor = Color.Gray
+                            )
+
                         )
 
                     }
@@ -83,7 +98,12 @@ fun MainEntryScreen() {
         NavHost(
             navController = navController,
             startDestination = ScreenRoutes.HomeTab.routeName,
-            modifier = Modifier.padding(paddingValues = paddingValues)
+            modifier = Modifier.padding(
+                start = dimensionResource(R.dimen.basicPadding),
+                end = dimensionResource(R.dimen.basicPadding),
+                top = paddingValues.calculateTopPadding(),
+                bottom = paddingValues.calculateBottomPadding()
+            )
         ) {
 
             // home tab (main)
