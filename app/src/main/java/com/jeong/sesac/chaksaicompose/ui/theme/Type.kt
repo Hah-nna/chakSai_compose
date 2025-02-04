@@ -17,9 +17,9 @@ val pretendardFontFamily = FontFamily(
 val AppTypography = Typography(
     titleLarge = TextStyle(
         fontFamily = pretendardFontFamily,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 20.sp,
-        lineHeight = 20.sp * lineHeightPercentage
+        fontWeight = FontWeight.ExtraBold,
+        fontSize = 22.sp,
+        lineHeight = 24.sp * lineHeightPercentage
     ),
     titleMedium = TextStyle(
         fontFamily = pretendardFontFamily,
