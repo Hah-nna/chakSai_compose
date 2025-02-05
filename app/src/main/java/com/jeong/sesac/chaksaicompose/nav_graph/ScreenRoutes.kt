@@ -7,8 +7,8 @@ sealed class ScreenRoutes(val routeName : String) {
     data object HomeTab : ScreenRoutes("Home")
     data object LibraryMapTab : ScreenRoutes("Map")
     data object RecordTab : ScreenRoutes("Record")
-    data object ChattingTab : ScreenRoutes("Chatting")
-    data object MyPageTab : ScreenRoutes("MyPage")
+    data object ChattingTab : ScreenRoutes("Chat")
+    data object MyPageTab : ScreenRoutes("My")
 
     /**
      * 하위 스크린

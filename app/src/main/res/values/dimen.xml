@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- title -->
+    <dimen name="titleLarge">20sp</dimen>
+    <dimen name="titleMedium">18sp</dimen>
+    <dimen name="titleSmall">14sp</dimen>
+
+    <!-- button -->
+    <dimen name="labelLarge">18sp</dimen>
+    <dimen name="labelMedium">16sp</dimen>
+    <dimen name="labelSmall">14sp</dimen>
+
+    <!-- body -->
+    <dimen name="bodyLarge">18sp</dimen>
+    <dimen name="bodyMedium">14sp</dimen>
+    <dimen name="bodySmall">10sp</dimen>
+
+    <!-- padding -->
+    <dimen name="basicPadding">16dp</dimen>
+    <dimen name="cardPadding">8dp</dimen>
+
+    <!-- card -->
+    <dimen name="card_width">160dp</dimen>
+    <dimen name="card_height">180dp</dimen>
+    
+    <!-- logo -->
+    <dimen name="logo_width">100dp</dimen>
+    <dimen name="logo_height">100dp</dimen>
+
+</resources>

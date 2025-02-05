@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">chakSaiCompose</string>
+
+    <!-- login -->
+    <string name="login_title">닉네임을 입력해주세요</string>
+    <string name="login_sub_title">서비스 사용에 필요합니다</string>
+    <string name="login_tf_placeHolder">닉네임을 작성해주세요</string>
+
+    <!-- splash screen -->
+    <string name="application_name">CHAKSAI</string>
+
+    <!-- home -->
+    <!-- home 화면에 쓰이는 string-->
+    <string name="main_header">안녕하세요 %1$s 님🙌🏻</string>
+    <string name="main_weekly_popular_note_title">이번주 인기 쪽지</string>
+    <string name="main_recently_new_note_title">최근 등록된 쪽지</string>
+    <string name="more_content">더보기</string>
+
+    <!-- content descriptions -->
+    <string name="icon_more_content">더보기</string>
+
+    <!-- note detail -->
+    <string name="tf_placeHolder">댓글을 작성해주세요</string>
+    <string name="comment_count">댓글 : %d 개</string>
+
+    <!-- top app bar -->
+    <string name="desc_top_app_bar">이전으로</string>
+
+    <!-- note writing -->
+    <string name="note_writing_header">도서관에서 있었던 일들을\n자유롭게 남겨주세요</string>
+    <string name="note_writing_title">제목</string>
+    <string name="note_writing_img">이미지</string>
+    <string name="tf_title_place_holder">제목을 적어주세요</string>
+
+
 </resources>

@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- note background -->
+    <color name="note_bg_1">#FFF9C4</color>
+    <color name="note_bg_2">#FFE0B2</color>
+    <color name="note_bg_3">#F8BBD0</color>
+    <color name="note_bg_4">#E1BEE7</color>
+    <color name="note_bg_5">#DCEDC8</color>
+    <color name="note_bg_6">#B2EBF2</color>
 </resources>
