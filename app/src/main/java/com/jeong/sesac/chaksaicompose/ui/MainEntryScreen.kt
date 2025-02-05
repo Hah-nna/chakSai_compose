@@ -38,6 +38,7 @@ import com.jeong.sesac.chaksaicompose.ui.map.MapSearchScreen
 import com.jeong.sesac.chaksaicompose.ui.myPage.MyPageTabScreen
 import com.jeong.sesac.chaksaicompose.ui.myPage.MyProfileScreen
 import com.jeong.sesac.chaksaicompose.ui.record.RecordTabScreen
+import com.jeong.sesac.chaksaicompose.ui.map.LibraryNoteListScreen
 
 @Preview(showBackground = true)
 @Composable
@@ -133,6 +134,12 @@ fun MainEntryScreen() {
             composable(ScreenRoutes.LibraryMapTabScreenGroup.MapSearch.routeName) {
                 MapSearchScreen(navController)
             }
+
+            // 도서관별 쪽지 리스트 조회 페이지
+            composable(ScreenRoutes.LibraryMapTabScreenGroup.LibraryNoteList.routeName) {
+                LibraryNoteListScreen(navController)
+            }
+
 
             // record tab RecordTabScreen
             composable(ScreenRoutes.RecordTab.routeName) {
