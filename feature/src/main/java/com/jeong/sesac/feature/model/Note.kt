@@ -18,3 +18,38 @@ data class NoteWithUser(
     val content: String,
     val likes: Int,
 )
+
+data class Comment(
+    val id: String,
+    val userId: String,
+    val noteId: String,
+    val content: String,
+    val createdAt: String,
+    val userInfo: UserInfo
+)
+
+data class User(
+    val id: String,
+    val profile: String,
+    val nickname: String,
+    val created_at: String,
+    val provider_info: ProviderType = ProviderType.KAKAO
+) {
+    fun toMap(): Map<String, Any> {
+        return mapOf(
+            "id" to id,
+            "nickname" to nickname,
+            "profile" to profile,
+            "created_at" to created_at,
+            "provider_info" to provider_info.toString()
+        )
+    }
+
+}
+
+
+enum class ProviderType {
+    KAKAO,
+    NAVER,
+    GOOGLE
+}
