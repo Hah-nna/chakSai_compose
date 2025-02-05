@@ -44,7 +44,7 @@ private fun tempNoteDate(): NoteWithUser {
         id = "note3",
         userInfo = UserInfo(
             id = "user456",
-            profile = "https://example.com/profile2.jpg",
+            profile = "https://example.com/profile.jpg",
             nickName = "벤앤제리"
         ),
         image = R.drawable.ic_launcher_background,
