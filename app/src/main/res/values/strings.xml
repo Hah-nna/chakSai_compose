@@ -22,6 +22,7 @@
     <!-- note detail -->
     <string name="tf_placeHolder">댓글을 작성해주세요</string>
     <string name="comment_count">댓글 : %d 개</string>
+    <string name="register">등록</string>
 
     <!-- top app bar -->
     <string name="desc_top_app_bar">이전으로</string>
@@ -31,6 +32,26 @@
     <string name="note_writing_title">제목</string>
     <string name="note_writing_img">이미지</string>
     <string name="tf_title_place_holder">제목을 적어주세요</string>
+    <string name="tf_write_content">내용을 직성해주세요</string>
 
+    <!-- my page -->
+    <string name="darkMode">다크모드</string>
+    <string name="applyDarkMode">다크모드 적용</string>
+    <string name="push">PUSH</string>
+    <string name="pushLikes">내쪽지에 좋아요가 눌릴 때 알림받기</string>
+    <string name="pushComment">내쪽지에 댓글이 달릴 때 알림받기</string>
+    <string name="policies">이용약관 및 개인정보 방침</string>
+    <string name="contact">문의하기</string>
 
+    <string name="profile">프로필 사진</string>
+    <string name="nickname">닉네임</string>
+    <string name="validNickname">2~8글자, 영어 대소문자, 한글, 숫자만 가능</string>
+
+    <!-- button -->
+    <string name="confirm">확인</string>
+    <string name="albumBtnDesc">앨범에서 사진 선택</string>
+    <string name="albumBtn">앨범에서 선택</string>
+    <string name="cameraBtnDesc">카메라 선택</string>
+    <string name="cameraBtn">사진 찍기</string>
+    <string name="chooseGetPhoto">앨범이나 카메라 선택</string>
 </resources>
