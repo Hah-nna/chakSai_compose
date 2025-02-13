@@ -54,6 +54,7 @@ import androidx.navigation.compose.rememberNavController
 import com.jeong.sesac.chaksaicompose.R
 import com.jeong.sesac.chaksaicompose.common.mockNotes
 import com.jeong.sesac.chaksaicompose.ui.home.NewNotesScreen
+import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
 import com.jeong.sesac.chaksaicompose.ui.theme.AppTypography
 import com.jeong.sesac.feature.model.NoteWithUser
 
@@ -83,7 +84,7 @@ fun LibraryNoteListContainer() {
                             horizontalArrangement = Arrangement.Center,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text("평화나루 도서관", style = AppTypography.labelMedium)
+                            Text("평화나루 도서관", style = AppTheme.typography.labelMedium)
                             Icon(
                                 Icons.Filled.KeyboardArrowDown,
                                 contentDescription = "library_filter",
@@ -180,16 +181,16 @@ fun NoteItemUI(itemData: NoteWithUser) {
                 Text(
                     itemData.userInfo.nickName,
                     overflow = TextOverflow.Ellipsis,
-                    style = AppTypography.bodyMedium,
+                    style = AppTheme.typography.bodyMedium,
                     modifier = Modifier.padding(horizontal = 8.dp)
                 )
                 Spacer(Modifier.weight(1f))
-                Text("5분전", style = AppTypography.bodySmall)
+                Text("5분전", style = AppTheme.typography.bodySmall)
             }
 
             Spacer(Modifier.height(12.dp))
 
-            Text(itemData.title, overflow = TextOverflow.Ellipsis, style = AppTypography.titleSmall)
+            Text(itemData.title, overflow = TextOverflow.Ellipsis, style = AppTheme.typography.titleSmall)
 
             Spacer(Modifier.height(12.dp))
 
@@ -197,7 +198,7 @@ fun NoteItemUI(itemData: NoteWithUser) {
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Text(itemData.libraryName, style = AppTypography.bodyMedium, color = Color.DarkGray)
+                Text(itemData.libraryName, style = AppTheme.typography.bodyMedium, color = Color.DarkGray)
                 Icon(imageVector = Icons.Filled.FavoriteBorder, tint = Color.White, contentDescription = "like", modifier = Modifier.size(24.dp))
             }
         }

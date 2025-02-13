@@ -47,6 +47,7 @@ import androidx.navigation.compose.rememberNavController
 import com.jeong.sesac.chaksaicompose.R
 import com.jeong.sesac.chaksaicompose.component.CommonSpacer
 import com.jeong.sesac.chaksaicompose.component.CommonTopAppBar
+import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
 import com.jeong.sesac.chaksaicompose.ui.theme.AppTypography
 
 val cardBG = listOf(
@@ -86,7 +87,7 @@ fun LibraryWriteNoteContent(padding: PaddingValues) {
         verticalArrangement = Arrangement.Top
     ) {
 
-        Text(stringResource(R.string.note_writing_header), style = AppTypography.titleMedium)
+        Text(stringResource(R.string.note_writing_header), style = AppTheme.typography.titleMedium)
         CommonSpacer(20)
 
         LazyRow(
@@ -104,7 +105,7 @@ fun LibraryWriteNoteContent(padding: PaddingValues) {
 
         Text(
             stringResource(R.string.note_writing_title),
-            style = AppTypography.titleSmall,
+            style = AppTheme.typography.titleSmall,
             modifier = Modifier.align(Alignment.Start).padding(vertical = 8.dp)
         )
 
@@ -145,8 +146,8 @@ fun LibraryWriteNoteContent(padding: PaddingValues) {
                 onValueChange = { newText: String -> text = newText },
                 modifier = Modifier.fillMaxSize(),
                 singleLine = false,
-                placeholder = { Text("내용을 직성해주세요", style = AppTypography.bodyMedium) },
-                textStyle = AppTypography.bodyMedium,
+                placeholder = { Text("내용을 직성해주세요", style = AppTheme.typography.bodyMedium) },
+                textStyle = AppTheme.typography.bodyMedium,
                 colors = TextFieldDefaults.colors(
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent
@@ -156,7 +157,7 @@ fun LibraryWriteNoteContent(padding: PaddingValues) {
 
         CommonSpacer(20)
         Text(
-            stringResource(R.string.note_writing_img), style = AppTypography.titleSmall,
+            stringResource(R.string.note_writing_img), style = AppTheme.typography.titleSmall,
             modifier = Modifier
                 .align(Alignment.Start)
                 .padding(vertical = 12.dp)

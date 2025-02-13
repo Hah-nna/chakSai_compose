@@ -27,12 +27,6 @@ data class BottomNavigationItem (
                 icon = R.drawable.ic_record,
                 route = ScreenRoutes.RecordTab.routeName
             ),
-            // 채팅
-            BottomNavigationItem(
-                tabName = ScreenRoutes.ChattingTab.routeName,
-                icon = R.drawable.ic_chatting,
-                route = ScreenRoutes.ChattingTab.routeName
-            ),
             // 마이 페이지
             BottomNavigationItem(
                 tabName = ScreenRoutes.MyPageTab.routeName,

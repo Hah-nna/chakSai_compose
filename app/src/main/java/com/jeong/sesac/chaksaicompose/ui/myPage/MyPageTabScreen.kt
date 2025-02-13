@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.jeong.sesac.chaksaicompose.R
+import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
 import com.jeong.sesac.chaksaicompose.ui.theme.AppTypography
 
 @Composable
@@ -73,7 +74,7 @@ fun MyPageTabContent() {
                 }
                 Text(
                     "닉네임",
-                    style = AppTypography.titleSmall,
+                    style = AppTheme.typography.titleSmall,
                     modifier = Modifier.padding(vertical = 8.dp)
                 )
             }
@@ -89,26 +90,26 @@ fun MyPageTabContent() {
         }
 
 
-        Text("다크모드", style = AppTypography.titleSmall, color = Color.Gray, modifier = Modifier.align(Alignment.Start).padding(vertical = 8.dp))
+        Text("다크모드", style = AppTheme.typography.titleSmall, color = Color.Gray, modifier = Modifier.align(Alignment.Start).padding(vertical = 8.dp))
         Row (
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-        Text("다크모드 적용", style = AppTypography.bodyLarge)
+        Text("다크모드 적용", style = AppTheme.typography.bodyLarge)
         Switch(onCheckedChange = {}, checked = false)
         }
 
         HorizontalDivider(thickness = 0.5.dp, modifier = Modifier.padding(vertical = 12.dp))
 
 
-        Text("PUSH", style = AppTypography.titleSmall, color = Color.Gray, modifier = Modifier.align(Alignment.Start).padding(vertical = 8.dp))
+        Text("PUSH", style = AppTheme.typography.titleSmall, color = Color.Gray, modifier = Modifier.align(Alignment.Start).padding(vertical = 8.dp))
         Row (
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text("내쪽지에 좋아요가 눌릴 때 알림받기", style = AppTypography.bodyLarge)
+            Text("내쪽지에 좋아요가 눌릴 때 알림받기", style = AppTheme.typography.bodyLarge)
             Switch(onCheckedChange = {}, checked = false)
         }
 
@@ -117,7 +118,7 @@ fun MyPageTabContent() {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text("내쪽지에 댓글이 달릴 때 알림받기", style = AppTypography.bodyLarge)
+            Text("내쪽지에 댓글이 달릴 때 알림받기", style = AppTheme.typography.bodyLarge)
             Switch(onCheckedChange = {}, checked = false)
         }
 
@@ -125,7 +126,7 @@ fun MyPageTabContent() {
         Row(modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween) {
-        Text("문의하기", style = AppTypography.bodyLarge, modifier = Modifier.padding(vertical = 12.dp))
+        Text("문의하기", style = AppTheme.typography.bodyLarge, modifier = Modifier.padding(vertical = 12.dp))
             Icon(
                 painter = painterResource(R.drawable.ic_right_arrow),
                 contentDescription = "go_to_setting_page",
@@ -138,7 +139,7 @@ fun MyPageTabContent() {
         Row(modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween) {
-            Text("이용약관 및 개인정보 방침", style = AppTypography.bodyLarge, modifier = Modifier.padding(vertical = 12.dp))
+            Text("이용약관 및 개인정보 방침", style = AppTheme.typography.bodyLarge, modifier = Modifier.padding(vertical = 12.dp))
             Icon(
                 painter = painterResource(R.drawable.ic_right_arrow),
                 contentDescription = "go_to_setting_page",

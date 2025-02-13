@@ -42,6 +42,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.jeong.sesac.chaksaicompose.R
 import com.jeong.sesac.chaksaicompose.component.CommonTopAppBar
+import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
 import com.jeong.sesac.chaksaicompose.ui.theme.AppTypography
 
 @Composable
@@ -61,7 +62,7 @@ fun MyProfileContent(innerPadding: PaddingValues) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(Modifier.height(12.dp))
-        Text("프로필 사진", style = AppTypography.titleSmall, color = Color.Gray, modifier = Modifier.align(Alignment.Start).padding(vertical = 8.dp))
+        Text("프로필 사진", style = AppTheme.typography.titleSmall, color = Color.Gray, modifier = Modifier.align(Alignment.Start).padding(vertical = 8.dp))
         Card(
             modifier = Modifier
                 .width(100.dp)
@@ -92,7 +93,7 @@ fun MyProfileContent(innerPadding: PaddingValues) {
                     modifier = Modifier.size(24.dp),
                     tint = Color.Black
                 )
-                Text("앨범에서 선택", style = AppTypography.labelSmall, color = Color.Black, modifier = Modifier.padding(start = 8.dp) )
+                Text("앨범에서 선택", style = AppTheme.typography.labelSmall, color = Color.Black, modifier = Modifier.padding(start = 8.dp) )
             }
 
             OutlinedButton(onClick = {}) {
@@ -102,11 +103,11 @@ fun MyProfileContent(innerPadding: PaddingValues) {
                     modifier = Modifier.size(24.dp),
                     tint = Color.Black
                 )
-                Text("앨범에서 선택", style = AppTypography.labelSmall, color = Color.Black, modifier = Modifier.padding(start = 8.dp) )
+                Text("앨범에서 선택", style = AppTheme.typography.labelSmall, color = Color.Black, modifier = Modifier.padding(start = 8.dp) )
             }
         }
 
-        Text("닉네임", style = AppTypography.titleSmall, color = Color.Gray, modifier = Modifier.align(Alignment.Start).padding(vertical = 12.dp))
+        Text("닉네임", style = AppTheme.typography.titleSmall, color = Color.Gray, modifier = Modifier.align(Alignment.Start).padding(vertical = 12.dp))
 
         TextField(
             value = text,
@@ -146,7 +147,7 @@ fun MyProfileContent(innerPadding: PaddingValues) {
                 Color.White
             )
         ) {
-            Text("확인", style = AppTypography.labelMedium, modifier = Modifier.padding(vertical = 8.dp))
+            Text("확인", style = AppTheme.typography.labelMedium, modifier = Modifier.padding(vertical = 8.dp))
         }
     }
 
