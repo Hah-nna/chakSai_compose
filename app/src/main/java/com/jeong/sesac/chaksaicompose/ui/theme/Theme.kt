@@ -91,25 +91,27 @@ private val typography = AppTypography(
     bodyMedium = TextStyle(
         fontFamily = pretendardFontFamily,
         fontWeight = FontWeight.W400,
-        fontSize = 14.sp,
+        fontSize = 16.sp,
     ),
     bodySmall = TextStyle(
         fontFamily = pretendardFontFamily,
         fontWeight = FontWeight.W400,
-        fontSize = 10.sp,
+        fontSize = 14.sp,
     ),
 )
 
 private val shape = AppShape(
     container = RoundedCornerShape(12.dp),
-    button = RoundedCornerShape(8.dp)
+    button = RoundedCornerShape(12.dp)
 )
 
 private val size = AppSize(
+    xl = 32.dp,
     large = 24.dp,
     medium = 16.dp,
     normal = 12.dp,
-    small = 8.dp
+    small = 8.dp,
+    xs = 4.dp
 )
 
 @Composable
