@@ -10,21 +10,34 @@
     <dimen name="labelMedium">16sp</dimen>
     <dimen name="labelSmall">14sp</dimen>
 
+    <dimen name="labelSmallHeight">54dp</dimen>
+
     <!-- body -->
     <dimen name="bodyLarge">18sp</dimen>
     <dimen name="bodyMedium">14sp</dimen>
     <dimen name="bodySmall">10sp</dimen>
 
     <!-- padding -->
+    <dimen name="largePadding">18dp</dimen>
     <dimen name="basicPadding">16dp</dimen>
+    <dimen name="normalPadding">12dp</dimen>
     <dimen name="cardPadding">8dp</dimen>
 
     <!-- card -->
-    <dimen name="card_width">160dp</dimen>
-    <dimen name="card_height">180dp</dimen>
-    
+    <dimen name="cardMedium">160dp</dimen>
+    <dimen name="cardXl">140dp</dimen>
+
     <!-- logo -->
-    <dimen name="logo_width">100dp</dimen>
-    <dimen name="logo_height">100dp</dimen>
+    <dimen name="logoWidth">100dp</dimen>
+    <dimen name="logoHeight">100dp</dimen>
+
+    <!-- font -->
+    <dimen name="fontNormal">12sp</dimen>
+
+    <!-- img -->
+    <dimen name="profileLage">80dp</dimen>
+    <dimen name="profileSmall">24dp</dimen>
+
+
 
 </resources>
