@@ -12,22 +12,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,21 +22,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import com.jeong.sesac.chaksaicompose.R
 import com.jeong.sesac.chaksaicompose.common.mockComments
-import com.jeong.sesac.chaksaicompose.ui.theme.ButtonTheme
-import com.jeong.sesac.feature.model.Comment
+import com.jeong.sesac.chaksaicompose.component.CommonSpacer
+import com.jeong.sesac.chaksaicompose.component.CommonTopAppBar
+import com.jeong.sesac.chaksaicompose.component.button.CustomButtonSmall
+import com.jeong.sesac.chaksaicompose.component.ProfileSmall
+import com.jeong.sesac.chaksaicompose.component.comment.CommentUI
+import com.jeong.sesac.chaksaicompose.component.textField.TextFieldNormal
+import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
 import com.jeong.sesac.feature.model.NoteWithUser
 import com.jeong.sesac.feature.model.UserInfo
 import java.util.Date
@@ -72,44 +60,23 @@ private fun tempNoteDate(): NoteWithUser {
     )
 }
 
-
 @Composable
 fun NoteDetailScreen(
     noteId: String, note: NoteWithUser,
     onBackClick: () -> Unit
 ) {
-
-    DetailContent(note){}
+    DetailContent(note) {}
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailContent(note: NoteWithUser, function: () -> Unit) {
+fun DetailContent(note: NoteWithUser, onBackClick: () -> Unit) {
     var text by remember { mutableStateOf("") }
-
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                colors = TopAppBarDefaults.largeTopAppBarColors(
-                    containerColor = Color.White,
-                    titleContentColor = Color.Black
-                ),
-                title = { Text("") },
-                navigationIcon = {
-                    IconButton(onClick = {}) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = null
-                        )
-                    }
-                }
-            )
-        }
-    ) { innerPadding ->
-
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .padding(innerPadding)) {
+    CommonTopAppBar("", null) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+        ) {
             Image(
                 painter = painterResource(note.image),
                 contentDescription = "note_img",
@@ -120,38 +87,28 @@ fun DetailContent(note: NoteWithUser, function: () -> Unit) {
                     .height(180.dp)
             )
 
-            Spacer(Modifier.height(20.dp))
+            CommonSpacer(20)
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Image(
-                    painter = painterResource(R.drawable.ic_launcher_background),
-                    contentDescription = "profile_img",
-                    contentScale = ContentScale.FillBounds,
-                    modifier = Modifier
-                        .width(24.dp)
-                        .height(24.dp)
-                        .clip(CircleShape)
-                )
-                Spacer(Modifier.width(8.dp))
-                Text(note.userInfo.nickName, style = MaterialTheme.typography.bodySmall)
+                ProfileSmall(R.drawable.ic_launcher_background)
+                Spacer(Modifier.width(AppTheme.size.small))
+                Text(note.userInfo.nickName, style = AppTheme.typography.bodySmall)
             }
             HorizontalDivider(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 10.dp)
             )
-
-
             Text(
                 note.title,
-                style = MaterialTheme.typography.titleMedium,
+                style = AppTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
 
-            Spacer(Modifier.height(10.dp))
+            CommonSpacer(10)
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -159,106 +116,46 @@ fun DetailContent(note: NoteWithUser, function: () -> Unit) {
             ) {
                 Text(
                     note.libraryName,
-                    style = MaterialTheme.typography.titleSmall,
+                    style = AppTheme.typography.titleSmall,
                     fontWeight = FontWeight.Normal
                 )
                 Text(
                     note.createdAt.toString(),
-                    style = MaterialTheme.typography.titleSmall,
+                    style = AppTheme.typography.titleSmall,
                     fontWeight = FontWeight.Normal
                 )
             }
 
-            Spacer(Modifier.height(20.dp))
+            CommonSpacer(20)
 
-            Text(note.content, style = MaterialTheme.typography.bodyMedium)
+            Text(note.content, style = AppTheme.typography.bodyMedium)
 
-            Spacer(Modifier.height(30.dp))
+            CommonSpacer(30)
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(AppTheme.size.small)
             ) {
-                OutlinedTextField(
-                    value = text,
-                    onValueChange = { text = it },
-                    maxLines = 1,
-                    modifier = Modifier
-                        .weight(1f)
-                        .height(50.dp),
-                    shape = RoundedCornerShape(8.dp),
-                    placeholder = {
-                        Text(
-                            stringResource(R.string.tf_placeHolder),
-                            style = TextStyle(fontSize = 12.sp)
-                        )
-                    },
-                    textStyle = TextStyle(
-                        fontSize = 12.sp,
-                    ),
-                    colors = TextFieldDefaults.colors(
-                        focusedTextColor = MaterialTheme.colorScheme.outline,
-                        unfocusedTextColor = Color.Gray,
-                        focusedIndicatorColor = MaterialTheme.colorScheme.primary,
-                        unfocusedIndicatorColor = MaterialTheme.colorScheme.outline
-                    )
 
-                )
+                TextFieldNormal(text, stringResource(R.string.tf_placeHolder), modifier = Modifier
+                    .weight(1f), onValueChange = {})
 
-                Button(
-                    onClick = {},
-                    shape = ButtonTheme.defaultButtonShape,
-                    modifier = Modifier.height(50.dp)
-                ) {
-                    Text("등록")
-                }
+                CustomButtonSmall(stringResource(R.string.register), onClick = {})
             }
 
-            Spacer(Modifier.height(30.dp))
+            CommonSpacer(30)
 
             Text(stringResource(R.string.comment_count, mockComments.size))
 
             LazyColumn {
-                items(mockComments) {
-                    item ->
-                    CommentUI(itemData = item)
+                items(mockComments) { item ->
+                    CommentUI(itemData = item, R.drawable.ic_launcher_background)
                 }
-
-
             }
 
         }
-    }
-}
 
-
-
-@Composable
-fun CommentUI(itemData: Comment) {
-    Column(
-    horizontalAlignment = Alignment.Start,
-    verticalArrangement = Arrangement.Center,
-        modifier = Modifier.padding(vertical = 8.dp)
-    ) {
-        Row (
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ){
-            Image(
-                painter = painterResource(R.drawable.ic_launcher_background),
-                contentDescription = "profile_img",
-                contentScale = ContentScale.FillBounds,
-                modifier = Modifier
-                    .width(24.dp)
-                    .height(24.dp)
-                    .clip(CircleShape)
-            )
-            Text(itemData.userInfo.nickName, modifier = Modifier.padding(horizontal = 8.dp))
-            Text(itemData.createdAt, style = MaterialTheme.typography.labelSmall, color = Color.DarkGray)
-        }
-        Text(itemData.content, modifier = Modifier.padding(vertical = 8.dp))
-        HorizontalDivider()
     }
 }
 
@@ -267,5 +164,7 @@ fun CommentUI(itemData: Comment) {
 @Composable
 private fun NoteDetailScreenPreview() {
     val previewNavController = rememberNavController()
-    NoteDetailScreen("1", tempNoteDate(), onBackClick = {})
+    AppTheme {
+        NoteDetailScreen("1", tempNoteDate(), onBackClick = {})
+    }
 }

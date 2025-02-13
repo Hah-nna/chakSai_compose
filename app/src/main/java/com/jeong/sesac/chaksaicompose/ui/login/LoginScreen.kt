@@ -1,20 +1,13 @@
 package com.jeong.sesac.chaksaicompose.ui.login
 
-import android.content.Intent
-import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,75 +18,57 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat.startActivity
-import com.jeong.sesac.chaksaicompose.MainActivity
 import com.jeong.sesac.chaksaicompose.R
 import com.jeong.sesac.chaksaicompose.common.AppPreferenceManager
-import com.jeong.sesac.chaksaicompose.ui.theme.ButtonTheme
+import com.jeong.sesac.chaksaicompose.component.button.CustomButtonLarge
+import com.jeong.sesac.chaksaicompose.component.textField.TextFieldNormal
+import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
 
 @Composable
-@Preview(showBackground = true)
 fun LoginScreen() {
     var text by remember { mutableStateOf("") }
     val context = LocalContext.current
     val preference = AppPreferenceManager.getInstance(context).nickName
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
+        modifier = Modifier.fillMaxSize().padding(horizontal = AppTheme.size.medium).background(Color.White),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
 
-        Text(stringResource(R.string.login_title), style = MaterialTheme.typography.titleLarge)
+        Text(stringResource(R.string.login_title), style = AppTheme.typography.titleLarge)
         Text(
             stringResource(R.string.login_sub_title),
-            style = MaterialTheme.typography.titleMedium,
+            style = AppTheme.typography.titleMedium,
             color = Color.DarkGray
         )
 
         Spacer(Modifier.height(80.dp))
-
-        TextField(
-            value = text,
-            onValueChange = { text = it },
-            maxLines = 1,
-            shape = RoundedCornerShape(8.dp),
-            modifier = Modifier.padding(vertical = 12.dp).fillMaxWidth(),
-            placeholder = {
-                Text(
-                    stringResource(R.string.login_tf_placeHolder),
-                    style = TextStyle(fontSize = 12.sp)
-                )
-            },
-            textStyle = TextStyle(
-                fontSize = 12.sp,
-            ),
-            colors = TextFieldDefaults.colors(
-                focusedTextColor = MaterialTheme.colorScheme.outline,
-                unfocusedTextColor = Color.Gray,
-                focusedIndicatorColor = MaterialTheme.colorScheme.primary,
-                unfocusedIndicatorColor = Color.White
-            )
-        )
+        TextFieldNormal(text, stringResource(R.string.login_tf_placeHolder), modifier = Modifier ) {
+            text = it
+        }
 
         Spacer(Modifier.height(80.dp))
 
-        Button(
-            onClick = {
-
-            },
-            shape = RoundedCornerShape(12.dp),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("등록", modifier = Modifier.padding(8.dp))
-        }
+        CustomButtonLarge("등록", modifier = Modifier, onClick = {})
     }
 }
 
+@Preview(name = "Light Mode")
+@Composable
+fun LoginScreenLightPreview() {
+    AppTheme(darkTheme = false) {
+        LoginScreen()
+    }
+}
 
-
+@Preview(name = "Dark Mode")
+@Composable
+fun LoginScreenDarkPreview() {
+    AppTheme(darkTheme = true) {
+        LoginScreen()
+    }
+}
 
