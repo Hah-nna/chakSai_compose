@@ -28,13 +28,11 @@ import com.jeong.sesac.chaksaicompose.R
 import com.jeong.sesac.chaksaicompose.nav_graph.BottomNavigationItem
 import com.jeong.sesac.chaksaicompose.nav_graph.ScreenRoutes
 import com.jeong.sesac.chaksaicompose.nav_graph.commonNoteDetailNavGraph
-import com.jeong.sesac.chaksaicompose.ui.chatting.ChattingTabScreen
 import com.jeong.sesac.chaksaicompose.ui.home.HomeTabScreen
 import com.jeong.sesac.chaksaicompose.ui.home.NewNotesScreen
 import com.jeong.sesac.chaksaicompose.ui.home.WeeklyNotesScreen
 import com.jeong.sesac.chaksaicompose.ui.map.LibraryMapTabScreen
 import com.jeong.sesac.chaksaicompose.ui.map.LibraryWriteNoteScreen
-import com.jeong.sesac.chaksaicompose.ui.map.MapSearchScreen
 import com.jeong.sesac.chaksaicompose.ui.myPage.MyPageTabScreen
 import com.jeong.sesac.chaksaicompose.ui.myPage.MyProfileScreen
 import com.jeong.sesac.chaksaicompose.ui.record.RecordTabScreen
@@ -130,11 +128,6 @@ fun MainEntryScreen() {
                 LibraryMapTabScreen(navController)
             }
 
-            // Map Search
-            composable(ScreenRoutes.LibraryMapTabScreenGroup.MapSearch.routeName) {
-                MapSearchScreen(navController)
-            }
-
             // 도서관별 쪽지 리스트 조회 페이지
             composable(ScreenRoutes.LibraryMapTabScreenGroup.LibraryNoteList.routeName) {
                 LibraryNoteListScreen(navController)
@@ -146,10 +139,6 @@ fun MainEntryScreen() {
                 RecordTabScreen(navController)
             }
 
-            // chatting tab
-            composable(ScreenRoutes.ChattingTab.routeName) {
-                ChattingTabScreen(navController)
-            }
 
             // MyPageTab
             composable(ScreenRoutes.MyPageTab.routeName) {
