@@ -37,7 +37,7 @@ fun GifImgLoader(image: Int) {
             }).build(), imageLoader = imageLoader
         ),
         contentDescription = null,
-        modifier = Modifier.width(dimensionResource(R.dimen.logo_width)).height(dimensionResource(R.dimen.logo_height)),
+        modifier = Modifier.width(dimensionResource(R.dimen.logoWidth)).height(dimensionResource(R.dimen.logoHeight)),
         contentScale = ContentScale.Fit
     )
 }

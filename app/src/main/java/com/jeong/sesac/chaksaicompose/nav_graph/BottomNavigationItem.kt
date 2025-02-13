@@ -1,8 +1,5 @@
 package com.jeong.sesac.chaksaicompose.nav_graph
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.ui.graphics.vector.ImageVector
 import com.jeong.sesac.chaksaicompose.R
 
 data class BottomNavigationItem (
@@ -21,7 +18,7 @@ data class BottomNavigationItem (
             // library map tab
             BottomNavigationItem(
                 tabName = ScreenRoutes.LibraryMapTab.routeName,
-                icon = R.drawable.ic_library_map,
+                icon = R.drawable.ic_map,
                 route = ScreenRoutes.LibraryMapTab.routeName
             ),
             // record
@@ -30,16 +27,10 @@ data class BottomNavigationItem (
                 icon = R.drawable.ic_record,
                 route = ScreenRoutes.RecordTab.routeName
             ),
-            // 채팅
-            BottomNavigationItem(
-                tabName = ScreenRoutes.ChattingTab.routeName,
-                icon = R.drawable.ic_chat,
-                route = ScreenRoutes.ChattingTab.routeName
-            ),
             // 마이 페이지
             BottomNavigationItem(
                 tabName = ScreenRoutes.MyPageTab.routeName,
-                icon = R.drawable.ic_my_page,
+                icon = R.drawable.ic_setting,
                 route = ScreenRoutes.MyPageTab.routeName
             ),
 

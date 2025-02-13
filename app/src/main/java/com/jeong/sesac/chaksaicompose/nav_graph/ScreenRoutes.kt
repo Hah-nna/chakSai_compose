@@ -7,7 +7,6 @@ sealed class ScreenRoutes(val routeName : String) {
     data object HomeTab : ScreenRoutes("Home")
     data object LibraryMapTab : ScreenRoutes("Map")
     data object RecordTab : ScreenRoutes("Record")
-    data object ChattingTab : ScreenRoutes("Chat")
     data object MyPageTab : ScreenRoutes("My")
 
     /**
@@ -25,8 +24,7 @@ sealed class ScreenRoutes(val routeName : String) {
         data object LibraryWriteNote : ScreenRoutes("library_write_note")
         // 내가 선택한 도서관 및 다른 도서관에 작성된 쪽지들 리스트들을 볼 수 있는 스크린
         data object LibraryNoteList : ScreenRoutes("library_note_list")
-        // LibraryMap 스크린에서 검색창을 누르면 나오는 프래그먼트
-        data object MapSearch : ScreenRoutes("map_search")
+
     }
 
     sealed interface MyPageScreenGroup {

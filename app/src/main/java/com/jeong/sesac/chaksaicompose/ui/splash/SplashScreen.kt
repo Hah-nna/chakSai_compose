@@ -20,7 +20,6 @@ import com.jeong.sesac.chaksaicompose.component.GifImgLoader
 @Preview(showBackground = true)
 fun SplashScreen() {
     Column(
-        // dynamic color 안 되게 바꾸기... 하...
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.primary),

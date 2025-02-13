@@ -8,9 +8,8 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.jeong.sesac.chaksaicompose.common.AppPreferenceManager
-import com.jeong.sesac.chaksaicompose.ui.MainEntryScreen
 import com.jeong.sesac.chaksaicompose.ui.splash.SplashScreen
-import com.jeong.sesac.chaksaicompose.ui.theme.ChakSaiComposeTheme
+import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
 
 class SplashActivity : ComponentActivity() {
     private val handler = Handler(Looper.getMainLooper())
@@ -18,7 +17,7 @@ class SplashActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ChakSaiComposeTheme() {
+            AppTheme() {
                 SplashScreen()
             }
         }

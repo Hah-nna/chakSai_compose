@@ -20,10 +20,7 @@ import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,21 +30,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.jeong.sesac.chaksaicompose.R
 import com.jeong.sesac.chaksaicompose.component.CommonSpacer
 import com.jeong.sesac.chaksaicompose.component.CommonTopAppBar
-import com.jeong.sesac.chaksaicompose.ui.theme.AppTypography
+import com.jeong.sesac.chaksaicompose.component.button.CustomButtonLarge
+import com.jeong.sesac.chaksaicompose.component.myPage.TitleText
+import com.jeong.sesac.chaksaicompose.component.textField.TextFieldNormal
+import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
 
 val cardBG = listOf(
     R.color.note_bg_1,
@@ -81,12 +78,12 @@ fun LibraryWriteNoteContent(padding: PaddingValues) {
         modifier = Modifier
             .fillMaxSize()
             .padding(padding)
-            .padding(horizontal = 16.dp),
+            .padding(horizontal = AppTheme.size.medium),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
 
-        Text(stringResource(R.string.note_writing_header), style = AppTypography.titleMedium)
+        Text(stringResource(R.string.note_writing_header), style = AppTheme.typography.titleMedium)
         CommonSpacer(20)
 
         LazyRow(
@@ -94,7 +91,7 @@ fun LibraryWriteNoteContent(padding: PaddingValues) {
                 .fillMaxWidth()
                 .padding(vertical = dimensionResource(R.dimen.cardPadding)
                 ),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(AppTheme.size.small)
         ) {
             items(cardBG) { item ->
                 BGListUI(item)
@@ -102,36 +99,14 @@ fun LibraryWriteNoteContent(padding: PaddingValues) {
             }
         }
 
-        Text(
+        TitleText(
             stringResource(R.string.note_writing_title),
-            style = AppTypography.titleSmall,
-            modifier = Modifier.align(Alignment.Start).padding(vertical = 8.dp)
+            modifier = Modifier.align(Alignment.Start).padding(vertical = AppTheme.size.normal),
+            Color.Black
+
         )
 
-        TextField(
-            value = text,
-            onValueChange = { text = it },
-            maxLines = 1,
-            shape = RoundedCornerShape(8.dp),
-            modifier = Modifier
-                .padding(vertical = 12.dp)
-                .fillMaxWidth(),
-            placeholder = {
-                Text(
-                    stringResource(R.string.tf_title_place_holder),
-                    style = TextStyle(fontSize = 12.sp)
-                )
-            },
-            textStyle = TextStyle(
-                fontSize = 12.sp,
-            ),
-            colors = TextFieldDefaults.colors(
-                focusedTextColor = Color.Black,
-                unfocusedTextColor = Color.Gray,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent
-            )
-        )
+        TextFieldNormal(text, stringResource(R.string.tf_title_place_holder), isBorder = false, modifier = Modifier, onValueChange = {})
 
         Card(
             modifier = Modifier
@@ -140,26 +115,16 @@ fun LibraryWriteNoteContent(padding: PaddingValues) {
             elevation = CardDefaults.cardElevation(4.dp),
         )
         {
-            TextField(
-                value = text,
-                onValueChange = { newText: String -> text = newText },
-                modifier = Modifier.fillMaxSize(),
-                singleLine = false,
-                placeholder = { Text("내용을 직성해주세요", style = AppTypography.bodyMedium) },
-                textStyle = AppTypography.bodyMedium,
-                colors = TextFieldDefaults.colors(
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent
-                )
-            )
+            TextFieldNormal(text, stringResource(R.string.tf_write_content), isSingleLine = false, isBorder = false, modifier = Modifier, onValueChange = {})
         }
 
         CommonSpacer(20)
-        Text(
-            stringResource(R.string.note_writing_img), style = AppTypography.titleSmall,
+        TitleText(
+            stringResource(R.string.note_writing_img),
             modifier = Modifier
                 .align(Alignment.Start)
-                .padding(vertical = 12.dp)
+                .padding(vertical = AppTheme.size.normal),
+            Color.Black
         )
 
         Button(
@@ -181,20 +146,8 @@ fun LibraryWriteNoteContent(padding: PaddingValues) {
 
         Spacer(Modifier.weight(1f))
 
-        Button(
-            onClick = {},
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 16.dp),
-            colors = ButtonColors(
-                MaterialTheme.colorScheme.primaryContainer,
-                Color.Black,
-                Color.LightGray,
-                Color.White
-            )
-        ) {
-            Text("등록", modifier = Modifier.padding(vertical = 8.dp))
-        }
+        CustomButtonLarge(stringResource(R.string.register), modifier = Modifier.padding(vertical = AppTheme.size.normal)) { }
+
     }
 }
 
@@ -212,5 +165,7 @@ fun BGListUI(bg: Int) {
 @Composable
 private fun LibraryWriteNoteScreenPreview() {
     val previewNavController = rememberNavController()
+    AppTheme {
     LibraryWriteNoteScreen(previewNavController)
+    }
 }
