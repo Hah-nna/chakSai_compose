@@ -42,10 +42,12 @@ data class AppShape(
 )
 
 data class AppSize(
+    val xl: Dp,
     val large: Dp,
     val medium: Dp,
     val normal: Dp,
-    val small: Dp
+    val small: Dp,
+    val xs: Dp
 )
 
 val LocalAppColorScheme = staticCompositionLocalOf {
@@ -90,9 +92,11 @@ val LocalAppShape = staticCompositionLocalOf {
 
 val LocalAppSize = staticCompositionLocalOf {
     AppSize(
+        xl = Dp.Unspecified,
         large = Dp.Unspecified,
         medium = Dp.Unspecified,
         normal = Dp.Unspecified,
-        small = Dp.Unspecified
+        small = Dp.Unspecified,
+        xs = Dp.Unspecified
     )
 }
