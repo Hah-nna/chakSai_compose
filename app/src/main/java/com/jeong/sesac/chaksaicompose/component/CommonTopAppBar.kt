@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CommonTopAppBar(title: String?, description: String, content: @Composable (PaddingValues) -> Unit) {
+fun CommonTopAppBar(title: String?, description: String?, content: @Composable (PaddingValues) -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
