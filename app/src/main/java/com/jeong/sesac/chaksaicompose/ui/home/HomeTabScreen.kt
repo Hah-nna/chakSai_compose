@@ -19,6 +19,7 @@ import com.jeong.sesac.chaksaicompose.common.mockNotes
 import com.jeong.sesac.chaksaicompose.component.CommonSpacer
 import com.jeong.sesac.chaksaicompose.component.home.LazyColUI
 import com.jeong.sesac.chaksaicompose.component.home.TitleUi
+import com.jeong.sesac.chaksaicompose.nav_graph.ScreenRoutes
 import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
 import com.jeong.sesac.feature.model.NoteWithUser
 
@@ -27,16 +28,24 @@ import com.jeong.sesac.feature.model.NoteWithUser
 fun HomeTabScreen(
     navController: NavController
 ) {
-    HomeTabContent()
+    HomeTabContent(navController)
 }
 
 
 @Composable
-private fun HomeTabContent() {
+private fun HomeTabContent(navController : NavController) {
     val mockData = mockNotes
-    val composeCtx = LocalContext.current
-    val onNoteClick = { noteData: NoteWithUser ->
-        Toast.makeText(composeCtx, "${noteData.title}", Toast.LENGTH_SHORT).show()
+    // post 디테일 페이지 이동 nav 함수
+    val onPostDetailClick = { noteData: NoteWithUser ->
+        navController.navigate(ScreenRoutes.PostDetailScreenGroup.LibraryPostDetail.routeName + "/${noteData.id}")
+    }
+    // 이번 주 인기 post 리스트 페이지 이동 함수
+    val onWeeklyPostsClick = {
+        navController.navigate(ScreenRoutes.HomeTabScreenGroup.WeeklyPosts)
+    }
+    // 이번 주 새로 등록된 post 리스트 페이지 이동 함수
+    val onNewPostsClick = {
+        navController.navigate(ScreenRoutes.HomeTabScreenGroup.NewPosts)
     }
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -52,15 +61,15 @@ private fun HomeTabContent() {
         )
         CommonSpacer(24)
 
-        TitleUi(R.string.main_weekly_popular_note_title)
+        TitleUi(R.string.main_weekly_popular_note_title, onMoreClick = onWeeklyPostsClick)
 
-        LazyColUI(mockData, onClick = onNoteClick)
+        LazyColUI(mockData, onPostClick = onPostDetailClick)
 
         CommonSpacer(24)
 
-        TitleUi(R.string.main_recently_new_note_title)
+        TitleUi(R.string.main_recently_new_note_title, onMoreClick = onNewPostsClick)
 
-        LazyColUI(mockData, onClick = onNoteClick)
+        LazyColUI(mockData, onPostClick = onPostDetailClick)
 
     }
 
