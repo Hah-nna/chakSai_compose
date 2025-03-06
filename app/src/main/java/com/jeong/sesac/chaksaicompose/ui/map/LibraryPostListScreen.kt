@@ -50,13 +50,13 @@ import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
 import com.jeong.sesac.feature.model.NoteWithUser
 
 @Composable
-fun LibraryNoteListScreen(navController: NavController) {
-    LibraryNoteListContainer()
+fun LibraryPostListScreen(navController: NavController) {
+    LibraryPostListContainer()
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LibraryNoteListContainer() {
+fun LibraryPostListContainer() {
     var isMenuExpanded by remember { mutableStateOf(false) }
 
     Scaffold(
@@ -87,12 +87,12 @@ fun LibraryNoteListContainer() {
             )
         }
     ) { padding ->
-        LibraryNoteListContent(padding)
+        LibraryPostListContent(padding)
     }
 }
 
 @Composable
-fun LibraryNoteListContent(padding: PaddingValues) {
+fun LibraryPostListContent(padding: PaddingValues) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -100,14 +100,14 @@ fun LibraryNoteListContent(padding: PaddingValues) {
     ) {
         LazyColumn {
             items(mockNotes) { item ->
-                NoteItemUI(itemData = item)
+                PostItemUI(itemData = item)
             }
         }
     }
 }
 
 @Composable
-fun NoteItemUI(itemData: NoteWithUser) {
+fun PostItemUI(itemData: NoteWithUser) {
     Row(
         modifier = Modifier.fillMaxWidth().padding(vertical = AppTheme.size.small),
         verticalAlignment = Alignment.CenterVertically
@@ -164,9 +164,9 @@ fun NoteItemUI(itemData: NoteWithUser) {
 
 @Preview(showBackground = true)
 @Composable
-private fun LibraryNoteListScreenPreview() {
+private fun LibraryPostListScreenPreview() {
     val previewNavController = rememberNavController()
     AppTheme {
-    LibraryNoteListScreen(navController = previewNavController)
+        LibraryPostListScreen(navController = previewNavController)
     }
 }

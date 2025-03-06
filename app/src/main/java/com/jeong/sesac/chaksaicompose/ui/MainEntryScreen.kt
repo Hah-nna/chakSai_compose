@@ -26,17 +26,17 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.jeong.sesac.chaksaicompose.R
 import com.jeong.sesac.chaksaicompose.nav_graph.BottomNavigationItem
+import com.jeong.sesac.chaksaicompose.nav_graph.PostDetailNavGraph
 import com.jeong.sesac.chaksaicompose.nav_graph.ScreenRoutes
-import com.jeong.sesac.chaksaicompose.nav_graph.commonNoteDetailNavGraph
 import com.jeong.sesac.chaksaicompose.ui.home.HomeTabScreen
-import com.jeong.sesac.chaksaicompose.ui.home.NewNotesScreen
-import com.jeong.sesac.chaksaicompose.ui.home.WeeklyNotesScreen
+import com.jeong.sesac.chaksaicompose.ui.home.NewPostsScreen
+import com.jeong.sesac.chaksaicompose.ui.home.WeeklyPostsScreen
 import com.jeong.sesac.chaksaicompose.ui.map.LibraryMapTabScreen
-import com.jeong.sesac.chaksaicompose.ui.map.LibraryWriteNoteScreen
+import com.jeong.sesac.chaksaicompose.ui.map.LibraryPostListScreen
+import com.jeong.sesac.chaksaicompose.ui.map.LibraryWritePostScreen
 import com.jeong.sesac.chaksaicompose.ui.myPage.MyPageTabScreen
 import com.jeong.sesac.chaksaicompose.ui.myPage.MyProfileScreen
 import com.jeong.sesac.chaksaicompose.ui.record.RecordTabScreen
-import com.jeong.sesac.chaksaicompose.ui.map.LibraryNoteListScreen
 
 @Preview(showBackground = true)
 @Composable
@@ -111,26 +111,26 @@ fun MainEntryScreen() {
             }
             // NewNotes (새로 등록된 쪽지 리스트 스크린) (main)
             composable(ScreenRoutes.HomeTabScreenGroup.NewNotes.routeName) {
-                NewNotesScreen(navController)
+                NewPostsScreen(navController)
             }
             // 이 주의 인기쪽지
             composable(ScreenRoutes.HomeTabScreenGroup.WeeklyNotes.routeName) {
-                WeeklyNotesScreen(navController)
+                WeeklyPostsScreen(navController)
             }
 
             // libraryMap tab
             composable(ScreenRoutes.LibraryMapTab.routeName) {
-                LibraryWriteNoteScreen(navController)
+                LibraryWritePostScreen(navController)
             }
 
             // 쪽지작성 스크린
-            composable(ScreenRoutes.LibraryMapTabScreenGroup.LibraryWriteNote.routeName) {
+            composable(ScreenRoutes.LibraryMapTabScreenGroup.LibraryWritePost.routeName) {
                 LibraryMapTabScreen(navController)
             }
 
             // 도서관별 쪽지 리스트 조회 페이지
-            composable(ScreenRoutes.LibraryMapTabScreenGroup.LibraryNoteList.routeName) {
-                LibraryNoteListScreen(navController)
+            composable(ScreenRoutes.LibraryMapTabScreenGroup.LibraryPostList.routeName) {
+                LibraryPostListScreen(navController)
             }
 
 
@@ -150,7 +150,7 @@ fun MainEntryScreen() {
                 MyProfileScreen(navController)
             }
 
-            commonNoteDetailNavGraph(navController)
+            PostDetailNavGraph(navController)
 
         }
     }

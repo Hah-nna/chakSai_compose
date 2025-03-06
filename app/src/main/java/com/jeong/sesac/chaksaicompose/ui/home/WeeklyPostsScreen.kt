@@ -21,17 +21,17 @@ import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
 
 private fun tabItemList() = listOf("최신순", "좋아요높은순", "좋아요낮은순")
 
-
 @Composable
-fun NewNotesScreen (navController : NavController
+fun WeeklyPostsScreen (
+    navController : NavController
 ) {
-    CommonTopAppBar("이번주 인기쪽지", "go to back") { paddingValue ->
-        NotesContent(tabItemList(), paddingValue)
+    CommonTopAppBar("최근 등록된 쪽지", "go to back") { padding ->
+        WeeklyPostsContent(tabItemList(), padding)
     }
 }
 
 @Composable
-fun NotesContent(tabItemList: List<String>, innerPadding: PaddingValues) {
+fun WeeklyPostsContent(tabItemList: List<String>, innerPadding: PaddingValues) {
     val pagerState = rememberPagerState(initialPage = 0) { tabItemList.size }
 
     Column(
@@ -57,11 +57,12 @@ fun NotesContent(tabItemList: List<String>, innerPadding: PaddingValues) {
     }
 }
 
+
 @Preview(showBackground = true)
 @Composable
-private fun NewNotesScreenPreview() {
+private fun WeeklyNotesScreenPreview() {
     val previewNavController = rememberNavController()
     AppTheme {
-    NewNotesScreen(navController = previewNavController)
+        WeeklyPostsScreen(navController = previewNavController)
     }
 }

@@ -1,4 +1,4 @@
-package com.jeong.sesac.chaksaicompose.ui.noteDetail
+package com.jeong.sesac.chaksaicompose.ui.postDetail
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -51,17 +50,17 @@ private fun tempNoteDate(): NoteWithUser {
             profile = "https://example.com/profile2.jpg",
             nickName = "벤앤제리"
         ),
-        image = R.drawable.ic_launcher_background,
+        image = R.drawable.ic_launcher_background.toString(),
         title = "세 번째 쪽지",
-        createdAt = Date(System.currentTimeMillis() - 48 * 60 * 60 * 1000),  // 2일 전
+        createdAt = System.currentTimeMillis(),
         libraryName = "구의도서관",
         content = "새로 나온 책 추천합니다",
-        likes = 15
+        likes = emptyList()
     )
 }
 
 @Composable
-fun NoteDetailScreen(
+fun PostDetailScreen(
     noteId: String, note: NoteWithUser,
     onBackClick: () -> Unit
 ) {
@@ -78,7 +77,7 @@ fun DetailContent(note: NoteWithUser, onBackClick: () -> Unit) {
                 .padding(innerPadding)
         ) {
             Image(
-                painter = painterResource(note.image),
+                painter = painterResource((note.image).toInt()),
                 contentDescription = "note_img",
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.Center,
@@ -162,9 +161,9 @@ fun DetailContent(note: NoteWithUser, onBackClick: () -> Unit) {
 
 @Preview(showBackground = true)
 @Composable
-private fun NoteDetailScreenPreview() {
+private fun PostDetailScreenPreview() {
     val previewNavController = rememberNavController()
     AppTheme {
-        NoteDetailScreen("1", tempNoteDate(), onBackClick = {})
+        PostDetailScreen("1", tempNoteDate(), onBackClick = {})
     }
 }

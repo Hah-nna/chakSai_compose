@@ -56,22 +56,22 @@ val cardBG = listOf(
 )
 
 @Composable
-fun LibraryWriteNoteScreen(
+fun LibraryWritePostScreen(
     navController: NavController
 ) {
-    LibraryWriteNoteContainer()
+    LibraryWritePostContainer()
 }
 
 @Composable
-fun LibraryWriteNoteContainer() {
+fun LibraryWritePostContainer() {
     CommonTopAppBar("", stringResource(R.string.desc_top_app_bar)) { innerPadding ->
-        LibraryWriteNoteContent(innerPadding)
+        LibraryWritePostContent(innerPadding)
     }
 }
 
 
 @Composable
-fun LibraryWriteNoteContent(padding: PaddingValues) {
+fun LibraryWritePostContent(padding: PaddingValues) {
     var text by remember { mutableStateOf("") }
 
     Column(
@@ -163,9 +163,9 @@ fun BGListUI(bg: Int) {
 
 @Preview(showBackground = true)
 @Composable
-private fun LibraryWriteNoteScreenPreview() {
+private fun LibraryWritePostScreenPreview() {
     val previewNavController = rememberNavController()
     AppTheme {
-    LibraryWriteNoteScreen(previewNavController)
+        LibraryWritePostScreen(previewNavController)
     }
 }
