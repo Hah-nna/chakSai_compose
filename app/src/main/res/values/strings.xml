@@ -6,6 +6,12 @@
     <string name="login_sub_title">서비스 사용에 필요합니다</string>
     <string name="login_tf_placeHolder">닉네임을 작성해주세요</string>
 
+
+    <string name="blank">" "</string>
+    <string name="validComment1">2글자 이상 8글자 이하만 가능합니다</string>
+    <string name="validComment2">특수문자와 공백은 사용할 수 없습니다</string>
+    <string name="validComment3">닉네임이 중복되는지 체크 중</string>
+
     <!-- splash screen -->
     <string name="application_name">CHAKSAI</string>
 
