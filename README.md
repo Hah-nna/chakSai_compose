@@ -45,7 +45,7 @@ Jetpack Compose Migration : 25.03.10 ~
 
 <br>
 
-## 5. 페이지별 기능
+## 5. 스크린별 기능
 
 **<ins>(1) 로그인 페이지</ins>**
 <div align="center">
