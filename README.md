@@ -21,9 +21,8 @@
 
 ## 3. 프로젝트 기간 
 
-25.01.24 ~ 25.02.24
-
-Jetpack Compose Migration : 25.03.10 ~ 
+- 1차 Material3 UVUX View With MVVM : 25.01.24 ~ 25.02.24
+- Jetpack Compose Migration : 25.03.10 ~ 진행중
 
 <br>
 
@@ -38,7 +37,7 @@ Jetpack Compose Migration : 25.03.10 ~
 |IDE|Android Studio|
 |Architecture|MVVM, Multi-Module|
 |Network|Retrofit2, Moshi|
-|Storage|Firebase Database, Firebase Storage|
+|Storage|FireStore, Firebase Storage|
 |Image Cache​|Coil|
 |Asynchronous|Coroutine, Corbind|
 |API, Libraries​|서지정보 OPEN API, CameraX, ML Kit, TedPermission|
