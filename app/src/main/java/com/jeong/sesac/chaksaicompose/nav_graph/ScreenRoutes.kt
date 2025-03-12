@@ -14,9 +14,9 @@ sealed class ScreenRoutes(val routeName : String) {
      * */
     sealed interface HomeTabScreenGroup {
         // 이번주 새로운 post 리스트 스크린
-        data object NewNotes : ScreenRoutes("new_posts")
+        data object NewPosts : ScreenRoutes("new_posts")
         // 이번 주 인기 post 리스트 스크린
-        data object WeeklyNotes : ScreenRoutes("weekly_posts")
+        data object PopularPosts : ScreenRoutes("popular_posts")
     }
 
     sealed interface LibraryMapTabScreenGroup {
@@ -25,9 +25,9 @@ sealed class ScreenRoutes(val routeName : String) {
         // 해당 도서관에 post를 작성하는 스크린
         data object LibraryWritePost : ScreenRoutes("library_write_post")
         // 해당 도서관에 등록된 북 리스트 스크린
-        data object LibraryBook : ScreenRoutes("library_book_list")
+        data object LibraryBookReviewList : ScreenRoutes("library_book_review_list")
         // 북 디테일 페이지
-        data object LibraryBookDetail : ScreenRoutes("library_book_detail")
+        data object LibraryBookReviewDetail : ScreenRoutes("library_book_review_detail")
         // 북+서평 등록 페이지
         data object LibraryWriteBook : ScreenRoutes("library_write_book")
         // 서평 수정 페이지
