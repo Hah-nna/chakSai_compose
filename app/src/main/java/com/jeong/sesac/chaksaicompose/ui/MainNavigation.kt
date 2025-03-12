@@ -26,24 +26,24 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.jeong.sesac.chaksaicompose.R
 import com.jeong.sesac.chaksaicompose.nav_graph.BottomNavigationItem
-import com.jeong.sesac.chaksaicompose.nav_graph.PostDetailNavGraph
+import com.jeong.sesac.chaksaicompose.nav_graph.HomeBaseRoute
+import com.jeong.sesac.chaksaicompose.nav_graph.NewPosts
+import com.jeong.sesac.chaksaicompose.nav_graph.PopularPosts
 import com.jeong.sesac.chaksaicompose.nav_graph.ScreenRoutes
-import com.jeong.sesac.chaksaicompose.ui.home.HomeTabScreen
-import com.jeong.sesac.chaksaicompose.ui.home.NewPostsScreen
-import com.jeong.sesac.chaksaicompose.ui.home.WeeklyPostsScreen
-import com.jeong.sesac.chaksaicompose.ui.map.LibraryMapTabScreen
-import com.jeong.sesac.chaksaicompose.ui.map.LibraryPostListScreen
-import com.jeong.sesac.chaksaicompose.ui.map.LibraryWritePostScreen
-import com.jeong.sesac.chaksaicompose.ui.myPage.MyPageTabScreen
-import com.jeong.sesac.chaksaicompose.ui.myPage.MyProfileScreen
+import com.jeong.sesac.chaksaicompose.nav_graph.homeNavGraph
+import com.jeong.sesac.chaksaicompose.nav_graph.libraryMapGraph
+import com.jeong.sesac.chaksaicompose.nav_graph.myPageNavGraph
+import com.jeong.sesac.chaksaicompose.nav_graph.postDetailNavGraph
 import com.jeong.sesac.chaksaicompose.ui.record.RecordTabScreen
+
 
 @Preview(showBackground = true)
 @Composable
-fun MainEntryScreen() {
+fun MainNavigation() {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
+    fun onBackClick() { navController.navigateUp() }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -96,7 +96,7 @@ fun MainEntryScreen() {
         paddingValues ->
         NavHost(
             navController = navController,
-            startDestination = ScreenRoutes.HomeTab.routeName,
+            startDestination = HomeBaseRoute,
             modifier = Modifier.padding(
                 start = dimensionResource(R.dimen.basicPadding),
                 end = dimensionResource(R.dimen.basicPadding),
@@ -105,54 +105,45 @@ fun MainEntryScreen() {
             )
         ) {
 
-            // home tab (main)
-            composable(ScreenRoutes.HomeTab.routeName) {
-                HomeTabScreen(navController)
-            }
-            // NewNotes (새로 등록된 쪽지 리스트 스크린) (main)
-            composable(ScreenRoutes.HomeTabScreenGroup.NewNotes.routeName) {
-                NewPostsScreen(navController)
-            }
-            // 이 주의 인기쪽지
-            composable(ScreenRoutes.HomeTabScreenGroup.WeeklyNotes.routeName) {
-                WeeklyPostsScreen(navController)
-            }
+            // home tab
+            homeNavGraph(
+                onNavigationUp = { onBackClick() },
+                onNavigationToNewPostList = { navController.navigate(NewPosts) },
+                onNavigationToPopularNotes = { navController.navigate(PopularPosts) },
+                onNavigationToDetailPost = { postId: String -> navController.navigate("post_detail_nav_graph/${postId}")}
+            )
+            // map tab
+            libraryMapGraph(
+                onNavigationUp = { onBackClick() },
+                onNavigationToPosts = { navController.navigate(ScreenRoutes.LibraryMapTabScreenGroup.LibraryPostList) },
+                onNavigationToWritePost = { navController.navigate(ScreenRoutes.LibraryMapTabScreenGroup.LibraryWritePost) },
+                onNavigationToBookReviews = { navController.navigate(ScreenRoutes.LibraryMapTabScreenGroup.LibraryBookReviewList) },
+                onNavigationToCreateBook = { navController.navigate(ScreenRoutes.LibraryMapTabScreenGroup.LibraryWriteBook) },
+                onNavigationToEditBookReview = { navController.navigate(ScreenRoutes.LibraryMapTabScreenGroup.LibraryEditBookReview) },
+                onNavigationToDetailPost = { postId: String -> navController.navigate("post_detail_nav_graph/${postId}")}
+            )
 
-            // libraryMap tab
-            composable(ScreenRoutes.LibraryMapTab.routeName) {
-                LibraryWritePostScreen(navController)
-            }
-
-            // 쪽지작성 스크린
-            composable(ScreenRoutes.LibraryMapTabScreenGroup.LibraryWritePost.routeName) {
-                LibraryMapTabScreen(navController)
-            }
-
-            // 도서관별 쪽지 리스트 조회 페이지
-            composable(ScreenRoutes.LibraryMapTabScreenGroup.LibraryPostList.routeName) {
-                LibraryPostListScreen(navController)
-            }
-
-
-            // record tab RecordTabScreen
+            // record tab
             composable(ScreenRoutes.RecordTab.routeName) {
                 RecordTabScreen(navController)
             }
 
+            // MyPage
+            myPageNavGraph(
+                onNavigationUp = { onBackClick() },
+                onNavigationToEditMyInfo = { navController.navigate(ScreenRoutes.MyPageScreenGroup.EditMyInfo) },
+                onNavigationToContact = {},
+                onNavigationToPolicies = {}
+            )
 
-            // MyPageTab
-            composable(ScreenRoutes.MyPageTab.routeName) {
-                MyPageTabScreen(navController)
-            }
-
-            // myProfile
-            composable(ScreenRoutes.MyPageScreenGroup.MyProfile.routeName) {
-                MyProfileScreen(navController)
-            }
-
-            PostDetailNavGraph(navController)
-
+            // post detail navGraph
+             postDetailNavGraph(
+                 onNavigationUp = { onBackClick() },
+                 onNavigationToEditPost = { navController.navigate(ScreenRoutes.PostDetailScreenGroup.EditPostScreen) },
+                 onNavigationToEditComment = { navController.navigate(ScreenRoutes.PostDetailScreenGroup.EditCommentScreen) }
+             )
         }
     }
 
 }
+
