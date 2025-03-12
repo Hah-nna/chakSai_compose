@@ -60,4 +60,15 @@
     <string name="cameraBtnDesc">카메라 선택</string>
     <string name="cameraBtn">사진 찍기</string>
     <string name="chooseGetPhoto">앨범이나 카메라 선택</string>
+
+    <!-- arguments -->
+    <string name="arg_libraryName">libraryName</string>
+
+
+    <!-- content description -->
+    <string name="postImageDesc">a image in post</string>
+    <string name="uploadImageDesc">uploaded image</string>
+    <string name="iconButton">icon button</string>
+    <string name="settingButton">go to setting screen</string>
+    <string name="profileImage">profile image</string>
 </resources>
