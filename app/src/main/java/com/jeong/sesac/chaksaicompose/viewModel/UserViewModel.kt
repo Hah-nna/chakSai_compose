@@ -15,7 +15,7 @@ class UserViewModel(private val userRepo: IUserRepository) : ViewModel() {
     val duplicateState get() = _duplicateState.asStateFlow()
 
     private val _userCreateState = MutableStateFlow<UiState<String>>(UiState.Loading)
-    val userCreateState = _userCreateState.asStateFlow()
+    val userCreateState get() = _userCreateState.asStateFlow()
 
     fun setUserInfo(nickname: String) = viewModelScope.launch {
         _userCreateState.value = UiState.Loading
