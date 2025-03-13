@@ -21,7 +21,7 @@
 
 ## 3. 프로젝트 기간 
 
-- 1차 Material3 UVUX View With MVVM : 25.01.24 ~ 25.02.24
+- 1차 Material3 UI/UX View With MVVM : 25.01.24 ~ 25.02.24
 - Jetpack Compose Migration : 25.03.10 ~ 진행중
 
 <br>
