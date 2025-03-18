@@ -1,4 +1,4 @@
-package com.jeong.sesac.chaksaicompose.ui
+package com.jeong.sesac.chaksaicompose.navigation
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -25,10 +26,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.jeong.sesac.chaksaicompose.R
+import com.jeong.sesac.chaksaicompose.common.AppPreferenceManager
 import com.jeong.sesac.chaksaicompose.nav_graph.BottomNavigationItem
 import com.jeong.sesac.chaksaicompose.nav_graph.HomeBaseRoute
 import com.jeong.sesac.chaksaicompose.nav_graph.NewPosts
 import com.jeong.sesac.chaksaicompose.nav_graph.PopularPosts
+import com.jeong.sesac.chaksaicompose.nav_graph.PostDetail
 import com.jeong.sesac.chaksaicompose.nav_graph.ScreenRoutes
 import com.jeong.sesac.chaksaicompose.nav_graph.homeNavGraph
 import com.jeong.sesac.chaksaicompose.nav_graph.libraryMapGraph
@@ -40,10 +43,14 @@ import com.jeong.sesac.chaksaicompose.ui.record.RecordTabScreen
 @Preview(showBackground = true)
 @Composable
 fun MainNavigation() {
+    val context = LocalContext.current
+    val preference = AppPreferenceManager.getInstance(context)
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
-    fun onBackClick() { navController.navigateUp() }
+    fun onBackClick() {
+        navController.navigateUp()
+    }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -60,7 +67,7 @@ fun MainNavigation() {
                                     fontSize = 14.sp,
                                     fontWeight = FontWeight.Thin,
 
-                                )
+                                    )
                             },
                             icon = {
                                 Icon(
@@ -68,7 +75,7 @@ fun MainNavigation() {
                                     contentDescription = navItem.tabName,
                                     modifier = Modifier.size(20.dp),
 
-                                )
+                                    )
                             },
                             onClick = {
                                 navController.navigate(navItem.route) {
@@ -86,14 +93,11 @@ fun MainNavigation() {
                                 unselectedIconColor = Color.Gray,
                                 unselectedTextColor = Color.Gray
                             )
-
                         )
-
                     }
             }
         }
-    ) {
-        paddingValues ->
+    ) { paddingValues ->
         NavHost(
             navController = navController,
             startDestination = HomeBaseRoute,
@@ -105,14 +109,21 @@ fun MainNavigation() {
             )
         ) {
 
-            // home tab
+            // home tab navGraph
             homeNavGraph(
+                preference = preference,
                 onNavigationUp = { onBackClick() },
                 onNavigationToNewPostList = { navController.navigate(NewPosts) },
                 onNavigationToPopularNotes = { navController.navigate(PopularPosts) },
-                onNavigationToDetailPost = { postId: String -> navController.navigate("post_detail_nav_graph/${postId}")}
+                onNavigationToDetailPost = { postId: String ->
+                    navController.navigate(
+                        PostDetail(
+                            postId
+                        )
+                    )
+                }
             )
-            // map tab
+            // map tab navGraph
             libraryMapGraph(
                 onNavigationUp = { onBackClick() },
                 onNavigationToPosts = { navController.navigate(ScreenRoutes.LibraryMapTabScreenGroup.LibraryPostList) },
@@ -120,15 +131,15 @@ fun MainNavigation() {
                 onNavigationToBookReviews = { navController.navigate(ScreenRoutes.LibraryMapTabScreenGroup.LibraryBookReviewList) },
                 onNavigationToCreateBook = { navController.navigate(ScreenRoutes.LibraryMapTabScreenGroup.LibraryWriteBook) },
                 onNavigationToEditBookReview = { navController.navigate(ScreenRoutes.LibraryMapTabScreenGroup.LibraryEditBookReview) },
-                onNavigationToDetailPost = { postId: String -> navController.navigate("post_detail_nav_graph/${postId}")}
+                onNavigationToDetailPost = { postId: String -> navController.navigate("post_detail_nav_graph/${postId}") }
             )
 
-            // record tab
+            // record tab navGraph
             composable(ScreenRoutes.RecordTab.routeName) {
                 RecordTabScreen(navController)
             }
 
-            // MyPage
+            // MyPage navGraph
             myPageNavGraph(
                 onNavigationUp = { onBackClick() },
                 onNavigationToEditMyInfo = { navController.navigate(ScreenRoutes.MyPageScreenGroup.EditMyInfo) },
@@ -137,11 +148,11 @@ fun MainNavigation() {
             )
 
             // post detail navGraph
-             postDetailNavGraph(
-                 onNavigationUp = { onBackClick() },
-                 onNavigationToEditPost = { navController.navigate(ScreenRoutes.PostDetailScreenGroup.EditPostScreen) },
-                 onNavigationToEditComment = { navController.navigate(ScreenRoutes.PostDetailScreenGroup.EditCommentScreen) }
-             )
+            postDetailNavGraph(
+                onNavigationUp = { onBackClick() },
+                onNavigationToEditPost = { navController.navigate(ScreenRoutes.PostDetailScreenGroup.EditPostScreen) },
+                onNavigationToEditComment = { navController.navigate(ScreenRoutes.PostDetailScreenGroup.EditCommentScreen) }
+            )
         }
     }
 
