@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">chakSaiCompose</string>
 
+    <string name="deleted_account">탈퇴한 사용자</string>
+
     <!-- login -->
     <string name="login_title">닉네임을 입력해주세요</string>
     <string name="login_sub_title">서비스 사용에 필요합니다</string>
     <string name="login_tf_placeHolder">닉네임을 작성해주세요</string>
-
 
     <string name="blank">" "</string>
     <string name="validComment1">2글자 이상 8글자 이하만 가능합니다</string>
@@ -21,9 +22,6 @@
     <string name="main_weekly_popular_note_title">이번주 인기 쪽지</string>
     <string name="main_recently_new_note_title">최근 등록된 쪽지</string>
     <string name="more_content">더보기</string>
-
-    <!-- content descriptions -->
-    <string name="icon_more_content">더보기</string>
 
     <!-- note detail -->
     <string name="tf_placeHolder">댓글을 작성해주세요</string>
@@ -66,9 +64,11 @@
 
 
     <!-- content description -->
-    <string name="postImageDesc">a image in post</string>
-    <string name="uploadImageDesc">uploaded image</string>
-    <string name="iconButton">icon button</string>
-    <string name="settingButton">go to setting screen</string>
-    <string name="profileImage">profile image</string>
+    <string name="icon_more_content">더보기 버튼</string>
+    <string name="post_img_desc">포스팅 이미지입니다</string>
+    <string name="uploadImageDesc">업로드된 이미지입니다</string>
+    <string name="iconButton">아이콘 버튼을 선택했습니다</string>
+    <string name="settingButton">개인정보 수정 화면으로 이동합니다</string>
+    <string name="profileImage">프로필 이미지입니다</string>
+    <string name="goToBack">이전 스크린으로 이동</string>
 </resources>
