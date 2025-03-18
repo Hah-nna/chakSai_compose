@@ -1,4 +1,4 @@
-package com.jeong.sesac.chaksaicompose.component.textField
+package com.jeong.sesac.chaksaicompose.component.custom_text_field
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxWidth
