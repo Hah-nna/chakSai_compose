@@ -12,7 +12,7 @@ import coil3.memory.MemoryCache
 const val COIL_MEMORY_CACHE_SIZE_PERCENT = 0.2
 
 //Coil Disk Cache Size Setting
-const val COIL_DISK_CACHE_DIR_NAME = "coil_file_cache"
+const val COIL_DISK_CACHE_DIR_NAME = "image_cache"
 const val COIL_DISK_CACHE_MAX_SIZE = 1024 * 1024 * 30
 
 
