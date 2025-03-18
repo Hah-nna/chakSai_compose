@@ -14,7 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.jeong.sesac.chaksaicompose.R
-import com.jeong.sesac.chaksaicompose.component.GifImgLoader
+import com.jeong.sesac.chaksaicompose.component.img.GifImgLoader
 
 @Composable
 @Preview(showBackground = true)
