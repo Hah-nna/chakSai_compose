@@ -1,8 +1,6 @@
-package com.jeong.sesac.chaksaicompose.ui.postDetail
+package com.jeong.sesac.chaksaicompose.ui.post_detail
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,6 +13,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -22,79 +22,88 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
+import coil3.compose.AsyncImage
 import com.jeong.sesac.chaksaicompose.R
+import com.jeong.sesac.chaksaicompose.common.coil.CoilImgRequest
 import com.jeong.sesac.chaksaicompose.common.mockComments
+import com.jeong.sesac.chaksaicompose.common.toTimeConverter
+import com.jeong.sesac.chaksaicompose.component.BasicTopAppBar
 import com.jeong.sesac.chaksaicompose.component.CommonSpacer
-import com.jeong.sesac.chaksaicompose.component.CommonTopAppBar
 import com.jeong.sesac.chaksaicompose.component.button.CustomButtonSmall
-import com.jeong.sesac.chaksaicompose.component.ProfileSmall
+import com.jeong.sesac.chaksaicompose.component.img.ProfileSmall
 import com.jeong.sesac.chaksaicompose.component.comment.CommentUI
-import com.jeong.sesac.chaksaicompose.component.textField.TextFieldNormal
+import com.jeong.sesac.chaksaicompose.component.custom_text_field.TextFieldNormal
+import com.jeong.sesac.chaksaicompose.model.UiState
 import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
-import com.jeong.sesac.feature.model.NoteWithUser
-import com.jeong.sesac.feature.model.UserInfo
-import java.util.Date
-
-private fun tempNoteDate(): NoteWithUser {
-
-    return NoteWithUser(
-        id = "note3",
-        userInfo = UserInfo(
-            id = "user456",
-            profile = "https://example.com/profile2.jpg",
-            nickName = "벤앤제리"
-        ),
-        image = R.drawable.ic_launcher_background.toString(),
-        title = "세 번째 쪽지",
-        createdAt = System.currentTimeMillis(),
-        libraryName = "구의도서관",
-        content = "새로 나온 책 추천합니다",
-        likes = emptyList()
-    )
-}
+import com.jeong.sesac.chaksaicompose.viewModel.PostViewModel
+import com.jeong.sesac.chaksaicompose.viewModel.appViewModelFactory
+import com.jeong.sesac.feature.model.PostWithUser
 
 @Composable
 fun PostDetailScreen(
-    noteId: String, note: NoteWithUser,
-    onBackClick: () -> Unit
+    postId: String,
+    onBackClick: () -> Unit,
+    onEditPostClick: (postId: String) -> Unit,
+    onEditCommentClick: (commentId: String) -> Unit,
+    viewModel: PostViewModel = viewModel(factory = appViewModelFactory)
 ) {
-    DetailContent(note) {}
+
+    val post = viewModel.selectedPostState.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.selectPost(postId)
+    }
+    when (val state = post.value) {
+        is UiState.Loading -> {}
+        is UiState.Success -> {
+            DetailContent(state.data, onBackClick, {}, {})
+        }
+
+        is UiState.Error -> {}
+    }
 }
 
 @Composable
-fun DetailContent(note: NoteWithUser, onBackClick: () -> Unit) {
+fun DetailContent(
+    post: PostWithUser,
+    onBackClick: () -> Unit,
+    onEditPostClick: (postId: String) -> Unit,
+    onEditCommentClick: (commentId: String) -> Unit
+) {
     var text by remember { mutableStateOf("") }
-    CommonTopAppBar("", null) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-        ) {
-            Image(
-                painter = painterResource((note.image).toInt()),
-                contentDescription = "note_img",
+    BasicTopAppBar(stringResource(R.string.blank), post.image, onBackClick) { innerPadding ->
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding()
+    ) {
+
+        item {
+            AsyncImage(
+                modifier = Modifier.height(250.dp),
+                model = CoilImgRequest.getImgRequest(post.image),
                 contentScale = ContentScale.Crop,
-                alignment = Alignment.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(180.dp)
+                contentDescription = stringResource(R.string.post_img_desc),
+                onState = { state -> CoilImgRequest.coilCallbackLog(post.image, state) }
             )
-
             CommonSpacer(20)
-
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                ProfileSmall(R.drawable.ic_launcher_background)
+                ProfileSmall(post.userInfo.profile)
                 Spacer(Modifier.width(AppTheme.size.small))
-                Text(note.userInfo.nickName, style = AppTheme.typography.bodySmall)
+                Text(
+                    post.userInfo.nickName.ifEmpty { stringResource(R.string.deleted_account) },
+                    style = AppTheme.typography.bodySmall
+                )
             }
             HorizontalDivider(
                 modifier = Modifier
@@ -102,7 +111,7 @@ fun DetailContent(note: NoteWithUser, onBackClick: () -> Unit) {
                     .padding(vertical = 10.dp)
             )
             Text(
-                note.title,
+                post.title,
                 style = AppTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
@@ -114,12 +123,12 @@ fun DetailContent(note: NoteWithUser, onBackClick: () -> Unit) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    note.libraryName,
+                    post.libraryName,
                     style = AppTheme.typography.titleSmall,
                     fontWeight = FontWeight.Normal
                 )
                 Text(
-                    note.createdAt.toString(),
+                    post.createdAt.toTimeConverter(),
                     style = AppTheme.typography.titleSmall,
                     fontWeight = FontWeight.Normal
                 )
@@ -127,7 +136,7 @@ fun DetailContent(note: NoteWithUser, onBackClick: () -> Unit) {
 
             CommonSpacer(20)
 
-            Text(note.content, style = AppTheme.typography.bodyMedium)
+            Text(post.content, style = AppTheme.typography.bodyMedium)
 
             CommonSpacer(30)
 
@@ -146,24 +155,22 @@ fun DetailContent(note: NoteWithUser, onBackClick: () -> Unit) {
             CommonSpacer(30)
 
             Text(stringResource(R.string.comment_count, mockComments.size))
+        }
 
-            LazyColumn {
-                items(mockComments) { item ->
-                    CommentUI(itemData = item, R.drawable.ic_launcher_background)
-                }
+            items(mockComments) { item ->
+                CommentUI(itemData = item, R.drawable.ic_launcher_background)
             }
 
         }
 
-    }
+}
 }
 
 
 @Preview(showBackground = true)
 @Composable
 private fun PostDetailScreenPreview() {
-    val previewNavController = rememberNavController()
     AppTheme {
-        PostDetailScreen("1", tempNoteDate(), onBackClick = {})
+        PostDetailScreen("1", {}, {}, {})
     }
 }
