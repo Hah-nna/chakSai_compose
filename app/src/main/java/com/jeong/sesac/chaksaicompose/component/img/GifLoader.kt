@@ -1,4 +1,4 @@
-package com.jeong.sesac.chaksaicompose.component
+package com.jeong.sesac.chaksaicompose.component.img
 
 import android.os.Build.VERSION.SDK_INT
 import androidx.compose.foundation.Image
