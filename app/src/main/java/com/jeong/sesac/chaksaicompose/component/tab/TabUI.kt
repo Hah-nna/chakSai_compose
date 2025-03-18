@@ -1,9 +1,7 @@
 package com.jeong.sesac.chaksaicompose.component.tab
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -25,11 +23,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
 import com.jeong.sesac.chaksaicompose.R
+import com.jeong.sesac.chaksaicompose.common.coil.CoilImgRequest
 import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
-import com.jeong.sesac.feature.model.NoteWithUser
+import com.jeong.sesac.feature.model.PostWithUser
 import kotlinx.coroutines.launch
 
 
@@ -81,20 +81,21 @@ fun TabLayoutUI(
 
 @Composable
 fun GridNoteList(
-    notes: List<NoteWithUser>
+    posts: List<PostWithUser>,
+    onNavigationToDetailPost: (postId: String) -> Unit,
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(AppTheme.size.small)
     ) {
-        items(notes) {note ->
-            ListItem(note)
+        items(posts) {post ->
+            ListItem(post, onNavigationToDetailPost)
         }
     }
 }
 
 @Composable
-fun ListItem(data: NoteWithUser) {
+fun ListItem(data: PostWithUser,  onNavigationToDetailPost: (postId: String) -> Unit,) {
     Card(
         modifier = Modifier
             .width(dimensionResource(R.dimen.cardMedium))
@@ -104,13 +105,15 @@ fun ListItem(data: NoteWithUser) {
         elevation = CardDefaults.cardElevation(
             defaultElevation = AppTheme.size.small,
             pressedElevation = AppTheme.size.xs
-        )
+        ),
+        onClick = { onNavigationToDetailPost(data.id) }
     ) {
-        Image(
-            modifier = Modifier.fillMaxWidth().fillMaxHeight(),
-            painter = painterResource(data.image),
-            contentDescription = "note_image",
-            contentScale = ContentScale.Crop
+        AsyncImage(
+            modifier = Modifier.fillMaxSize(),
+            model = CoilImgRequest.getImgRequest(data.image),
+            contentScale = ContentScale.Crop,
+            contentDescription = stringResource(R.string.post_img_desc),
+            onState = { state -> CoilImgRequest.coilCallbackLog(data.image, state) }
         )
     }
 }

@@ -50,6 +50,19 @@ data class AppSize(
     val xs: Dp
 )
 
+data class ButtonStyle (
+    val width: Dp,
+    val padding: Dp,
+    val text: TextStyle,
+    val color: Color
+)
+
+data class AppButton(
+    val l: ButtonStyle,
+    val m: ButtonStyle,
+    val s: ButtonStyle
+)
+
 val LocalAppColorScheme = staticCompositionLocalOf {
     AppColorScheme(
         primary = Color.Unspecified,
@@ -98,5 +111,28 @@ val LocalAppSize = staticCompositionLocalOf {
         normal = Dp.Unspecified,
         small = Dp.Unspecified,
         xs = Dp.Unspecified
+    )
+}
+
+val LocalButton = staticCompositionLocalOf {
+    AppButton(
+        l = ButtonStyle(
+            width = Dp.Unspecified,
+            padding = Dp.Unspecified,
+            text = TextStyle.Default,
+            color = Color.Unspecified
+        ),
+        m = ButtonStyle(
+            width = Dp.Unspecified,
+            padding = Dp.Unspecified,
+            text = TextStyle.Default,
+            color = Color.Unspecified
+        ),
+        s = ButtonStyle(
+            width = Dp.Unspecified,
+            padding = Dp.Unspecified,
+            text = TextStyle.Default,
+            color = Color.Unspecified
+        )
     )
 }

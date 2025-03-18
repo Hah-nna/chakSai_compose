@@ -1,9 +1,9 @@
 package com.jeong.sesac.chaksaicompose.component.home
 
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -24,13 +24,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import coil3.compose.AsyncImage
 import com.jeong.sesac.chaksaicompose.R
+import com.jeong.sesac.chaksaicompose.common.coil.CoilImgRequest
 import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
-import com.jeong.sesac.feature.model.NoteWithUser
+import com.jeong.sesac.feature.model.PostWithUser
 
 
 @Composable
-fun TitleUi(title: Int) {
+fun TitleUi(title: Int, onMoreClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth(),
@@ -42,15 +44,17 @@ fun TitleUi(title: Int) {
             style = AppTheme.typography.titleMedium
         )
         Row(
-            modifier = Modifier.fillMaxWidth(fraction = 0.25f),
+            modifier = Modifier.fillMaxWidth(fraction = 0.25f)
+                .clickable { onMoreClick() },
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceEvenly
+            horizontalArrangement = Arrangement.SpaceEvenly,
 
         ) {
             Text(
                 stringResource(R.string.more_content),
                 style = AppTheme.typography.titleSmall,
-                color = Color.Gray
+                color = Color.Gray,
+
             )
             Icon(
                 painter = painterResource(R.drawable.ic_right_arrow),
@@ -63,38 +67,38 @@ fun TitleUi(title: Int) {
 }
 
 @Composable
-fun LazyColUI(data: List<NoteWithUser>, onClick: (NoteWithUser) -> Unit) {
+fun LazyColUI(data: List<PostWithUser>, onPostClick: (PostWithUser) -> Unit) {
     LazyRow(
         modifier = Modifier.fillMaxWidth().padding(vertical = dimensionResource(R.dimen.cardPadding)),
     ) {
         items(data) { item ->
-            ListItemUI(data = item, onClick = onClick)
+            ListItemUI(data = item, onClick = onPostClick)
         }
     }
 }
 
 
 @Composable
-fun ListItemUI(data: NoteWithUser, onClick: (NoteWithUser) -> Unit) {
+fun ListItemUI(data: PostWithUser, onClick: (PostWithUser) -> Unit) {
     Card(
         modifier = Modifier
             .width(dimensionResource(R.dimen.cardMedium))
             .height(dimensionResource(R.dimen.cardMedium))
-            .padding(dimensionResource(R.dimen.cardPadding)),
+            .padding(dimensionResource(R.dimen.cardPadding))
+            .clickable { onClick(data) },
         shape = RoundedCornerShape(AppTheme.size.normal),
         elevation = CardDefaults.cardElevation(
             defaultElevation = AppTheme.size.xs,
             pressedElevation = AppTheme.size.small
-        )
+        ),
 
     ) {
-
-        Image(
-            modifier = Modifier.fillMaxWidth().fillMaxHeight(),
-            painter = painterResource(data.image),
-            contentDescription = "note_image",
-            contentScale = ContentScale.Crop
+        AsyncImage(
+            modifier = Modifier.fillMaxSize(),
+            model = CoilImgRequest.getImgRequest(data.image),
+            contentScale = ContentScale.Crop,
+            contentDescription = stringResource(R.string.post_img_desc),
+            onState = { state -> CoilImgRequest.coilCallbackLog(data.image, state) }
         )
-
     }
 }

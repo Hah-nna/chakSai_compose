@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "759955468135",
+    "project_id": "chaksai-a9aa2",
+    "storage_bucket": "chaksai-a9aa2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759955468135:android:5993cda78309cb56b889c2",
+        "android_client_info": {
+          "package_name": "com.jeong.sesac.chaksaicompose"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAlXVtuiIclCPDOkP5MHAokijX9COyHOs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759955468135:android:eca2c2b8c32599cdb889c2",
+        "android_client_info": {
+          "package_name": "com.jeong.sesac.sai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAlXVtuiIclCPDOkP5MHAokijX9COyHOs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

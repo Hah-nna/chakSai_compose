@@ -5,6 +5,6 @@ import androidx.navigation.NavController
 
 @Composable
 fun LibraryMapTabScreen(
-    navController : NavController
+
 ) {
 }
