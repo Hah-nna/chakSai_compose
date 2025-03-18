@@ -1,4 +1,4 @@
-package com.jeong.sesac.chaksaicompose.component.myPage
+package com.jeong.sesac.chaksaicompose.component.my_page
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import com.jeong.sesac.chaksaicompose.R
 import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
 
@@ -54,7 +55,7 @@ fun ETCItem(text: String) {
         )
         Icon(
             painter = painterResource(R.drawable.ic_right_arrow),
-            contentDescription = "go_to_setting_page",
+            contentDescription = stringResource(R.string.settingButton),
             modifier = Modifier
                 .size(AppTheme.size.large),
             tint = Color.LightGray
@@ -70,7 +71,7 @@ fun ProfileUI() {
     ) {
         Icon(
             painter = painterResource(R.drawable.ic_default_profile),
-            contentDescription = "profile_img",
+            contentDescription = stringResource(R.string.profileImage),
             modifier = Modifier.size(AppTheme.size.xl),
             tint = Color.DarkGray
         )
