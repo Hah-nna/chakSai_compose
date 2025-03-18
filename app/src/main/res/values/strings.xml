@@ -19,7 +19,7 @@
     <!-- home -->
     <!-- home 화면에 쓰이는 string-->
     <string name="main_header">안녕하세요 %1$s 님🙌🏻</string>
-    <string name="main_weekly_popular_note_title">이번주 인기 쪽지</string>
+    <string name="main_weekly_popular_note_title">최근 인기 쪽지</string>
     <string name="main_recently_new_note_title">최근 등록된 쪽지</string>
     <string name="more_content">더보기</string>
 
