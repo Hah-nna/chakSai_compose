@@ -28,10 +28,12 @@ import androidx.navigation.compose.rememberNavController
 import com.jeong.sesac.chaksaicompose.R
 import com.jeong.sesac.chaksaicompose.common.AppPreferenceManager
 import com.jeong.sesac.chaksaicompose.nav_graph.BottomNavigationItem
+import com.jeong.sesac.chaksaicompose.nav_graph.CommentEdit
 import com.jeong.sesac.chaksaicompose.nav_graph.HomeBaseRoute
 import com.jeong.sesac.chaksaicompose.nav_graph.NewPosts
 import com.jeong.sesac.chaksaicompose.nav_graph.PopularPosts
 import com.jeong.sesac.chaksaicompose.nav_graph.PostDetail
+import com.jeong.sesac.chaksaicompose.nav_graph.PostEdit
 import com.jeong.sesac.chaksaicompose.nav_graph.ScreenRoutes
 import com.jeong.sesac.chaksaicompose.nav_graph.homeNavGraph
 import com.jeong.sesac.chaksaicompose.nav_graph.libraryMapGraph
@@ -150,8 +152,8 @@ fun MainNavigation() {
             // post detail navGraph
             postDetailNavGraph(
                 onNavigationUp = { onBackClick() },
-                onNavigationToEditPost = { navController.navigate(ScreenRoutes.PostDetailScreenGroup.EditPostScreen) },
-                onNavigationToEditComment = { navController.navigate(ScreenRoutes.PostDetailScreenGroup.EditCommentScreen) }
+                onNavigationToEditPost = { postId: String -> navController.navigate(PostEdit(postId)) },
+                onNavigationToEditComment = { commentId -> navController.navigate(CommentEdit(commentId)) }
             )
         }
     }
