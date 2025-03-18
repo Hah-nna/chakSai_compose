@@ -1,4 +1,4 @@
-package com.jeong.sesac.chaksaicompose.ui.myPage
+package com.jeong.sesac.chaksaicompose.ui.my_page
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,20 +23,21 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.jeong.sesac.chaksaicompose.R
-import com.jeong.sesac.chaksaicompose.component.CommonTopAppBar
+import com.jeong.sesac.chaksaicompose.component.BasicTopAppBar
 import com.jeong.sesac.chaksaicompose.component.button.CustomButtonLarge
 import com.jeong.sesac.chaksaicompose.component.button.OutlineButton
-import com.jeong.sesac.chaksaicompose.component.myPage.ProfileUI
-import com.jeong.sesac.chaksaicompose.component.myPage.TitleText
-import com.jeong.sesac.chaksaicompose.component.textField.TextFieldNormal
+import com.jeong.sesac.chaksaicompose.component.my_page.ProfileUI
+import com.jeong.sesac.chaksaicompose.component.my_page.TitleText
+import com.jeong.sesac.chaksaicompose.component.custom_text_field.TextFieldNormal
 import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
 
 @Composable
-fun MyProfileScreen(navContoller: NavController) {
-    CommonTopAppBar("", null) { innerPadding ->
+fun MyProfileScreen(
+    onBackClick: () -> Unit
+) {
+    BasicTopAppBar (stringResource(R.string.blank), null, onBackClick) { innerPadding ->
         MyProfileContent(innerPadding)
     }
 
@@ -84,8 +85,7 @@ fun MyProfileContent(innerPadding: PaddingValues) {
 @Preview(showBackground = true)
 @Composable
 private fun MyProfileScreenPreview() {
-    val previewNavController = rememberNavController()
     AppTheme {
-    MyProfileScreen(previewNavController)
+    MyProfileScreen({})
     }
 }
