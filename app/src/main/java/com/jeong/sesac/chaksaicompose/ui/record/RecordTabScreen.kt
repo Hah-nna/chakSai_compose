@@ -43,8 +43,8 @@ fun RecordContent() {
         TabContentUI(
             tabPagerState,
             listOf(
-                { GridNoteList(mockNotes) },
-                { GridNoteList(mockNotes) },
+                { GridNoteList(mockNotes, {}) },
+                { GridNoteList(mockNotes, {}) },
             )
         )
     }
