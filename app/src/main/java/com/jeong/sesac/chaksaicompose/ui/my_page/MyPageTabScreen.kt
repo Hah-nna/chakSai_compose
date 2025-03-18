@@ -1,4 +1,4 @@
-package com.jeong.sesac.chaksaicompose.ui.myPage
+package com.jeong.sesac.chaksaicompose.ui.my_page
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -24,22 +24,30 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.jeong.sesac.chaksaicompose.R
-import com.jeong.sesac.chaksaicompose.component.myPage.ETCItem
-import com.jeong.sesac.chaksaicompose.component.myPage.ProfileUI
-import com.jeong.sesac.chaksaicompose.component.myPage.SwitchItem
-import com.jeong.sesac.chaksaicompose.component.myPage.TitleText
+import com.jeong.sesac.chaksaicompose.component.my_page.ETCItem
+import com.jeong.sesac.chaksaicompose.component.my_page.ProfileUI
+import com.jeong.sesac.chaksaicompose.component.my_page.SwitchItem
+import com.jeong.sesac.chaksaicompose.component.my_page.TitleText
 import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
 
 @Composable
-fun MyPageTabScreen(navController: NavController) {
-    MyPageTabContent()
+fun MyPageTabScreen(
+    onBackClick: () -> Unit,
+    onEditMyInfoClick: () -> Unit,
+    onContactClick: () -> Unit,
+    onPoliciesClick: () -> Unit
+) {
+    MyPageTabContent(onBackClick, onEditMyInfoClick, onContactClick, onPoliciesClick)
 }
 
 @Composable
-fun MyPageTabContent() {
+fun MyPageTabContent(
+    onBackClick: () -> Unit,
+    onEditMyInfoClick: () -> Unit,
+    onContactClick: () -> Unit,
+    onPoliciesClick: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -74,7 +82,7 @@ fun MyPageTabContent() {
 
             Icon(
                 painter = painterResource(R.drawable.ic_right_arrow),
-                contentDescription = "go_to_setting_page",
+                contentDescription = stringResource(R.string.settingButton),
                 modifier = Modifier
                     .align(Alignment.CenterEnd)
                     .size(AppTheme.size.large),
@@ -85,7 +93,10 @@ fun MyPageTabContent() {
         TitleText(stringResource(R.string.darkMode), Modifier.align(Alignment.Start))
         SwitchItem(stringResource(R.string.applyDarkMode))
 
-        HorizontalDivider(thickness = 0.5.dp, modifier = Modifier.padding(vertical = AppTheme.size.normal))
+        HorizontalDivider(
+            thickness = 0.5.dp,
+            modifier = Modifier.padding(vertical = AppTheme.size.normal)
+        )
 
         TitleText(stringResource(R.string.push), Modifier.align(Alignment.Start))
 
@@ -93,10 +104,16 @@ fun MyPageTabContent() {
 
         SwitchItem(stringResource(R.string.pushComment))
 
-        HorizontalDivider(thickness = 0.5.dp, modifier = Modifier.padding(vertical = AppTheme.size.normal))
+        HorizontalDivider(
+            thickness = 0.5.dp,
+            modifier = Modifier.padding(vertical = AppTheme.size.normal)
+        )
 
         ETCItem(stringResource(R.string.contact))
-        HorizontalDivider(thickness = 0.5.dp, modifier = Modifier.padding(vertical = AppTheme.size.normal))
+        HorizontalDivider(
+            thickness = 0.5.dp,
+            modifier = Modifier.padding(vertical = AppTheme.size.normal)
+        )
 
         ETCItem(stringResource(R.string.policies))
 
@@ -107,8 +124,9 @@ fun MyPageTabContent() {
 @Preview(showBackground = true)
 @Composable
 private fun MyPageTabScreenPreview() {
-    val previewNavController = rememberNavController()
     AppTheme {
-    MyPageTabScreen(previewNavController)
+        MyPageTabScreen(
+            {}, {}, {}, {}
+        )
     }
 }
