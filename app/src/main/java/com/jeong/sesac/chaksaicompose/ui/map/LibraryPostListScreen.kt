@@ -37,26 +37,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.jeong.sesac.chaksaicompose.R
 import com.jeong.sesac.chaksaicompose.common.mockNotes
 import com.jeong.sesac.chaksaicompose.component.CommonSpacer
-import com.jeong.sesac.chaksaicompose.component.ProfileSmall
+import com.jeong.sesac.chaksaicompose.component.img.ProfileSmall
 import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
-import com.jeong.sesac.feature.model.NoteWithUser
+import com.jeong.sesac.feature.model.PostWithUser
 
 @Composable
-fun LibraryPostListScreen(navController: NavController) {
-    LibraryPostListContainer()
+fun LibraryPostListScreen(libraryName: String, onBackClick: () -> Unit) {
+    LibraryPostListContainer(libraryName, onBackClick)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LibraryPostListContainer() {
+fun LibraryPostListContainer(libraryName: String, onBackClick: () -> Unit) {
     var isMenuExpanded by remember { mutableStateOf(false) }
 
     Scaffold(
@@ -66,7 +66,7 @@ fun LibraryPostListContainer() {
                     containerColor = Color.White,
                     titleContentColor = Color.Black
                 ),
-                title = { Text("") },
+                title = { Text(libraryName) },
                 navigationIcon = {
                     TextButton(
                         onClick = { isMenuExpanded = !isMenuExpanded },
@@ -81,7 +81,7 @@ fun LibraryPostListContainer() {
                 },
                 actions = {
                     IconButton(onClick = { }) {
-                        Icon(Icons.Filled.Search, contentDescription = "Localized description")
+                        Icon(Icons.Filled.Search, contentDescription = stringResource(R.string.iconButton))
                     }
                 },
             )
@@ -107,9 +107,11 @@ fun LibraryPostListContent(padding: PaddingValues) {
 }
 
 @Composable
-fun PostItemUI(itemData: NoteWithUser) {
+fun PostItemUI(itemData: PostWithUser) {
     Row(
-        modifier = Modifier.fillMaxWidth().padding(vertical = AppTheme.size.small),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = AppTheme.size.small),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Card(
@@ -122,7 +124,10 @@ fun PostItemUI(itemData: NoteWithUser) {
         }
 
         Column(
-            modifier = Modifier.padding(AppTheme.size.small).fillMaxWidth().wrapContentHeight(),
+            modifier = Modifier
+                .padding(AppTheme.size.small)
+                .fillMaxWidth()
+                .wrapContentHeight(),
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.Center
         ) {
@@ -132,7 +137,7 @@ fun PostItemUI(itemData: NoteWithUser) {
                 verticalAlignment = Alignment.CenterVertically,
 
                 ) {
-                ProfileSmall(R.drawable.ic_launcher_background)
+                ProfileSmall(itemData.userInfo.profile)
                 Text(
                     itemData.userInfo.nickName,
                     overflow = TextOverflow.Ellipsis,
@@ -167,6 +172,6 @@ fun PostItemUI(itemData: NoteWithUser) {
 private fun LibraryPostListScreenPreview() {
     val previewNavController = rememberNavController()
     AppTheme {
-        LibraryPostListScreen(navController = previewNavController)
+        LibraryPostListScreen("청량리도서관", {} )
     }
 }
