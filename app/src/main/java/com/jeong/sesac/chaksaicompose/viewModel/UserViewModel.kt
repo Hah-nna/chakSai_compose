@@ -1,10 +1,8 @@
 package com.jeong.sesac.chaksaicompose.viewModel
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeong.sesac.chaksaicompose.model.UiState
-import com.jeong.sesac.data.repository.UserRepositoryImpl
 import com.jeong.sesac.feature.repository.IUserRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
