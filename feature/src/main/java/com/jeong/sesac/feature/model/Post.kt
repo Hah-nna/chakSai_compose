@@ -13,7 +13,7 @@ data class PlaceInfo(
     val searchRadius: Int
 )
 
-data class Note(
+data class Post(
     val id: String = "",
     val userId: String = "",
     val image: String = "",
@@ -24,7 +24,7 @@ data class Note(
     val likes: List<String> = emptyList(),
 )
 
-data class NoteWithUser(
+data class PostWithUser(
     val id: String = "",
     val userInfo: UserInfo = UserInfo("", "", ""),
     val image: String = "",
