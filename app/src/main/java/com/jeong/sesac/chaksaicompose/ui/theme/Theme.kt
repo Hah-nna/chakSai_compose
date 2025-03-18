@@ -4,6 +4,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -26,7 +27,6 @@ private val DarkColorScheme = AppColorScheme(
     primaryContainer = YellowDark300,
     secondaryContainer = YellowDark400,
     tertiaryContainer = GreenDark200
-
 )
 
 private val LightColorScheme = AppColorScheme(
@@ -114,6 +114,27 @@ private val size = AppSize(
     xs = 4.dp
 )
 
+private val button = AppButton(
+    l = ButtonStyle(
+        width = 100.dp,
+        padding = 16.dp,
+        text = typography.labelLarge,
+        color = Color.Unspecified
+    ),
+    m = ButtonStyle(
+        width = 50.dp,
+        padding = 16.dp,
+        text = typography.labelMedium,
+        color = Color.Unspecified
+    ),
+    s = ButtonStyle(
+        width = 20.dp,
+        padding = 16.dp,
+        text = typography.labelSmall,
+        color = Color.Unspecified
+    )
+)
+
 @Composable
 fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -125,6 +146,7 @@ fun AppTheme(
         LocalAppTypography provides typography,
         LocalAppShape provides shape,
         LocalAppSize provides size,
+        LocalButton provides button,
         content = content
     )
 
@@ -142,5 +164,8 @@ object AppTheme {
 
     val size: AppSize
         @Composable get() = LocalAppSize.current
+
+    val button: AppButton
+        @Composable get() = LocalButton.current
 }
 
