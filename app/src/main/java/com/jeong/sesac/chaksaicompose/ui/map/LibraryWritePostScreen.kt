@@ -36,14 +36,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.jeong.sesac.chaksaicompose.R
+import com.jeong.sesac.chaksaicompose.component.BasicTopAppBar
 import com.jeong.sesac.chaksaicompose.component.CommonSpacer
-import com.jeong.sesac.chaksaicompose.component.CommonTopAppBar
 import com.jeong.sesac.chaksaicompose.component.button.CustomButtonLarge
-import com.jeong.sesac.chaksaicompose.component.myPage.TitleText
-import com.jeong.sesac.chaksaicompose.component.textField.TextFieldNormal
+import com.jeong.sesac.chaksaicompose.component.my_page.TitleText
+import com.jeong.sesac.chaksaicompose.component.custom_text_field.TextFieldNormal
 import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
 
 val cardBG = listOf(
@@ -56,15 +55,13 @@ val cardBG = listOf(
 )
 
 @Composable
-fun LibraryWritePostScreen(
-    navController: NavController
-) {
-    LibraryWritePostContainer()
+fun LibraryWritePostScreen(libraryName: String, onBackClick: () -> Unit) {
+    LibraryWritePostContainer(libraryName, onBackClick)
 }
 
 @Composable
-fun LibraryWritePostContainer() {
-    CommonTopAppBar("", stringResource(R.string.desc_top_app_bar)) { innerPadding ->
+fun LibraryWritePostContainer(libraryName: String, onBackClick: () -> Unit) {
+    BasicTopAppBar("", stringResource(R.string.desc_top_app_bar), onBackClick) { innerPadding ->
         LibraryWritePostContent(innerPadding)
     }
 }
@@ -137,7 +134,7 @@ fun LibraryWritePostContent(padding: PaddingValues) {
             Icon(
                 painter = painterResource(R.drawable.ic_gallery),
                 tint = Color.Black,
-                contentDescription = "upload image",
+                contentDescription = stringResource(R.string.uploadImageDesc),
                 modifier = Modifier
                     .width(24.dp)
                     .padding(vertical = 4.dp)
@@ -166,6 +163,6 @@ fun BGListUI(bg: Int) {
 private fun LibraryWritePostScreenPreview() {
     val previewNavController = rememberNavController()
     AppTheme {
-        LibraryWritePostScreen(previewNavController)
+        LibraryWritePostScreen("", {})
     }
 }
