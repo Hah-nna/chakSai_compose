@@ -1,4 +1,4 @@
-package com.jeong.sesac.chaksaicompose.viewModel
+package com.jeong.sesac.chaksaicompose.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
