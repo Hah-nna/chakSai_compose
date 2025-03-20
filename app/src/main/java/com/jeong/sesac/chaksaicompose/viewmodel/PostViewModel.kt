@@ -1,4 +1,4 @@
-package com.jeong.sesac.chaksaicompose.viewModel
+package com.jeong.sesac.chaksaicompose.viewmodel
 
 import android.os.Build
 import androidx.annotation.RequiresApi

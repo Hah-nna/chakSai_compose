@@ -20,8 +20,8 @@ import com.jeong.sesac.chaksaicompose.component.home.LazyColUI
 import com.jeong.sesac.chaksaicompose.component.home.TitleUi
 import com.jeong.sesac.chaksaicompose.model.UiState
 import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
-import com.jeong.sesac.chaksaicompose.viewModel.PostListViewModel
-import com.jeong.sesac.chaksaicompose.viewModel.appViewModelFactory
+import com.jeong.sesac.chaksaicompose.viewmodel.PostListViewModel
+import com.jeong.sesac.chaksaicompose.viewmodel.viewmodel_factory.appViewModelFactory
 import com.jeong.sesac.feature.model.PostWithUser
 
 
@@ -32,7 +32,6 @@ fun HomeTabScreen(
     onNavigationToNewPostList: (posts: List<PostWithUser>) -> Unit,
     onNavigationToPopularNotes: (posts: List<PostWithUser>) -> Unit,
     onNavigationToDetailPost: (postId: String) -> Unit,
-    viewModel: PostListViewModel = viewModel(factory = appViewModelFactory)
 ) {
     HomeTabContent(
         preference,
@@ -40,7 +39,6 @@ fun HomeTabScreen(
         onNavigationToNewPostList,
         onNavigationToPopularNotes,
         onNavigationToDetailPost,
-        viewModel
     )
 }
 

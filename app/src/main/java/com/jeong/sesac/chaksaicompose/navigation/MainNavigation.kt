@@ -32,10 +32,12 @@ import com.jeong.sesac.chaksaicompose.nav_graph.HomeBaseRoute
 import com.jeong.sesac.chaksaicompose.nav_graph.NewPosts
 import com.jeong.sesac.chaksaicompose.nav_graph.PopularPosts
 import com.jeong.sesac.chaksaicompose.nav_graph.PostDetail
+import com.jeong.sesac.chaksaicompose.nav_graph.PostEdit
 import com.jeong.sesac.chaksaicompose.nav_graph.ScreenRoutes
 import com.jeong.sesac.chaksaicompose.nav_graph.homeNavGraph
 import com.jeong.sesac.chaksaicompose.nav_graph.libraryMapGraph
 import com.jeong.sesac.chaksaicompose.nav_graph.myPageNavGraph
+import com.jeong.sesac.chaksaicompose.nav_graph.navigateToEditComment
 import com.jeong.sesac.chaksaicompose.nav_graph.postDetailNavGraph
 import com.jeong.sesac.chaksaicompose.ui.record.RecordTabScreen
 
@@ -115,13 +117,7 @@ fun MainNavigation() {
                 onNavigationUp = { onBackClick() },
                 onNavigationToNewPostList = { navController.navigate(NewPosts) },
                 onNavigationToPopularNotes = { navController.navigate(PopularPosts) },
-                onNavigationToDetailPost = { postId: String ->
-                    navController.navigate(
-                        PostDetail(
-                            postId
-                        )
-                    )
-                }
+                onNavigationToDetailPost = { postId: String -> navController.navigate(PostDetail(postId)) }
             )
             // map tab navGraph
             libraryMapGraph(
@@ -131,8 +127,7 @@ fun MainNavigation() {
                 onNavigationToBookReviews = { navController.navigate(ScreenRoutes.LibraryMapTabScreenGroup.LibraryBookReviewList) },
                 onNavigationToCreateBook = { navController.navigate(ScreenRoutes.LibraryMapTabScreenGroup.LibraryWriteBook) },
                 onNavigationToEditBookReview = { navController.navigate(ScreenRoutes.LibraryMapTabScreenGroup.LibraryEditBookReview) },
-                onNavigationToDetailPost = { postId: String -> navController.navigate("post_detail_nav_graph/${postId}") }
-            )
+                onNavigationToDetailPost = { postId: String -> navController.navigate(PostDetail(postId)) })
 
             // record tab navGraph
             composable(ScreenRoutes.RecordTab.routeName) {
@@ -149,12 +144,14 @@ fun MainNavigation() {
 
             // post detail navGraph
             postDetailNavGraph(
+                preference = preference,
                 onNavigationUp = { onBackClick() },
-                onNavigationToEditPost = { navController.navigate(ScreenRoutes.PostDetailScreenGroup.EditPostScreen) },
-                onNavigationToEditComment = { navController.navigate(ScreenRoutes.PostDetailScreenGroup.EditCommentScreen) }
+                onNavigationToEditPost = { postId: String -> navController.navigate(PostEdit(postId)) },
+                onNavigationToEditComment = { commentId, postId, userId, content -> navController.navigateToEditComment(commentId, postId, userId, content) },
             )
         }
     }
 
 }
+
 
