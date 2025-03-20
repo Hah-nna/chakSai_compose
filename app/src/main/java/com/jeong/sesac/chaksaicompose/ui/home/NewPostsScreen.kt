@@ -22,8 +22,8 @@ import com.jeong.sesac.chaksaicompose.component.tab.TabContentUI
 import com.jeong.sesac.chaksaicompose.component.tab.TabLayoutUI
 import com.jeong.sesac.chaksaicompose.model.UiState
 import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
-import com.jeong.sesac.chaksaicompose.viewModel.PostListViewModel
-import com.jeong.sesac.chaksaicompose.viewModel.appViewModelFactory
+import com.jeong.sesac.chaksaicompose.viewmodel.PostListViewModel
+import com.jeong.sesac.chaksaicompose.viewmodel.viewmodel_factory.appViewModelFactory
 import com.jeong.sesac.feature.model.PostWithUser
 
 private fun tabItemList() = listOf("최신순", "좋아요높은순", "좋아요낮은순")
@@ -34,8 +34,8 @@ fun NewPostsScreen(
     preference: AppPreferenceManager,
     onNavigationUp: () -> Unit,
     onNavigationToDetailPost: (postId: String) -> Unit,
-    viewModel: PostListViewModel = viewModel(factory = appViewModelFactory)
 ) {
+    val viewModel: PostListViewModel = viewModel(factory = appViewModelFactory)
     val newPostList = viewModel.newPostsState.collectAsState()
 
     LaunchedEffect(Unit) {
