@@ -16,27 +16,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.jeong.sesac.chaksaicompose.R
 import com.jeong.sesac.chaksaicompose.common.AppPreferenceManager
-import com.jeong.sesac.chaksaicompose.common.mockNotes
 import com.jeong.sesac.chaksaicompose.component.BasicTopAppBar
 import com.jeong.sesac.chaksaicompose.component.tab.GridNoteList
 import com.jeong.sesac.chaksaicompose.component.tab.TabContentUI
 import com.jeong.sesac.chaksaicompose.component.tab.TabLayoutUI
 import com.jeong.sesac.chaksaicompose.model.UiState
 import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
-import com.jeong.sesac.chaksaicompose.viewModel.PostListViewModel
-import com.jeong.sesac.chaksaicompose.viewModel.appViewModelFactory
+import com.jeong.sesac.chaksaicompose.viewmodel.PostListViewModel
+import com.jeong.sesac.chaksaicompose.viewmodel.viewmodel_factory.appViewModelFactory
 import com.jeong.sesac.feature.model.PostWithUser
 
 private fun tabItemList() = listOf("최신순", "좋아요높은순", "좋아요낮은순")
 
 @Composable
-fun PopularPostsScreen (
+fun PopularPostsScreen(
     preference: AppPreferenceManager,
     onNavigationUp: () -> Unit,
-    onNavigationToDetailPost: (postId: String) -> Unit,
-    viewModel: PostListViewModel = viewModel(factory = appViewModelFactory)
+    onNavigationToDetailPost: (postId: String) -> Unit
 ) {
 
+    val viewModel: PostListViewModel = viewModel(factory = appViewModelFactory)
     val popularPostList = viewModel.popularPostsState.collectAsState()
 
     LaunchedEffect(Unit) {
@@ -45,17 +44,32 @@ fun PopularPostsScreen (
         }
     }
 
-    BasicTopAppBar(stringResource(R.string.main_weekly_popular_note_title), stringResource(R.string.goToBack), onNavigationUp) { padding ->
-        when(val state = popularPostList.value) {
+    BasicTopAppBar(
+        stringResource(R.string.main_weekly_popular_note_title),
+        stringResource(R.string.goToBack),
+        onNavigationUp
+    ) { padding ->
+        when (val state = popularPostList.value) {
             is UiState.Loading -> {}
-            is UiState.Success -> PopularPostsContent(tabItemList(), padding, state.data, onNavigationToDetailPost)
+            is UiState.Success -> PopularPostsContent(
+                tabItemList(),
+                padding,
+                state.data,
+                onNavigationToDetailPost
+            )
+
             is UiState.Error -> {}
         }
     }
 }
 
 @Composable
-fun PopularPostsContent(tabItemList: List<String>, innerPadding: PaddingValues, data: List<PostWithUser>, onNavigationToDetailPost: (postId: String) -> Unit) {
+fun PopularPostsContent(
+    tabItemList: List<String>,
+    innerPadding: PaddingValues,
+    data: List<PostWithUser>,
+    onNavigationToDetailPost: (postId: String) -> Unit
+) {
     val pagerState = rememberPagerState(initialPage = 0) { tabItemList.size }
 
     Column(
@@ -66,7 +80,9 @@ fun PopularPostsContent(tabItemList: List<String>, innerPadding: PaddingValues, 
         TabLayoutUI(
             tabItem = tabItemList,
             pagerState = pagerState,
-            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
             onTabSelected = {}
         )
 
@@ -75,7 +91,12 @@ fun PopularPostsContent(tabItemList: List<String>, innerPadding: PaddingValues, 
             pages = listOf(
                 { GridNoteList(data.sortedBy { it.createdAt }, onNavigationToDetailPost) },
                 { GridNoteList(data.sortedBy { it.likes.size }, onNavigationToDetailPost) },
-                { GridNoteList(data.sortedByDescending { it.likes.size }, onNavigationToDetailPost) }
+                {
+                    GridNoteList(
+                        data.sortedByDescending { it.likes.size },
+                        onNavigationToDetailPost
+                    )
+                }
             )
         )
     }
