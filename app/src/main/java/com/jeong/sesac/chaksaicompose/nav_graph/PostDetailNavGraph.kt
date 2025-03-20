@@ -1,8 +1,13 @@
 package com.jeong.sesac.chaksaicompose.nav_graph
 
+import android.util.Log
+import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import androidx.navigation.toRoute
+import com.jeong.sesac.chaksaicompose.common.AppPreferenceManager
+import com.jeong.sesac.chaksaicompose.ui.post_detail.EditCommentScreen
 import com.jeong.sesac.chaksaicompose.ui.post_detail.PostDetailScreen
 import kotlinx.serialization.Serializable
 
@@ -21,7 +26,10 @@ data class PostEdit(
 
 @Serializable
 data class CommentEdit(
-    val commentId: String
+    val commentId: String,
+    val postId: String,
+    val userId: String,
+    val content: String
 )
 
 /**
@@ -29,9 +37,10 @@ data class CommentEdit(
  * 포스트 수정, 코멘트 수정 스크린도 포함
  * */
 fun NavGraphBuilder.postDetailNavGraph(
+    preference: AppPreferenceManager,
     onNavigationUp: () -> Unit,
     onNavigationToEditPost: (postId: String) -> Unit,
-    onNavigationToEditComment: (commentId: String) -> Unit
+    onNavigationToEditComment: (commentId: String, postId: String, userId: String, content: String) -> Unit,
 ) {
     navigation<PostDetailRoute>(
         startDestination = PostDetail::class
@@ -42,10 +51,11 @@ fun NavGraphBuilder.postDetailNavGraph(
                 ?: return@composable
 
             PostDetailScreen(
+                preference = preference,
                 postId = postId,
                 onBackClick = onNavigationUp,
                 onEditPostClick = { onNavigationToEditPost(postId) },
-                onEditCommentClick = { commentId -> onNavigationToEditComment(commentId) }
+                onEditCommentClick = { commentId, content -> onNavigationToEditComment(commentId, postId, preference.userId, content) }
             )
         }
         composable<PostEdit> { backStackEntry ->
@@ -55,26 +65,36 @@ fun NavGraphBuilder.postDetailNavGraph(
 //            EditPostScreen(
 //                postId = postId,
 //                onBackClick = onNavigationUp,
+//                onEditComplete =
 //            )
         }
 
         composable<CommentEdit>
-//        (
-//            route = ScreenRoutes.PostDetailScreenGroup.EditCommentScreen.routeName + "/{commentId}",
-//            arguments = listOf(
-//                navArgument("commentId") {
-//                    type = NavType.StringType
-//                    nullable = false
-//                }
-//            )
-//        )
         { backStackEntry ->
-            val commentId = backStackEntry.arguments?.getString("commentId")
-                ?: return@composable
-//            EditCommentScreen(
-//                commentId = commentId,
-//                onBackClick = onNavigationUp,
-//            )
+            val args = backStackEntry.toRoute<CommentEdit>()
+            EditCommentScreen(
+                commentId = args.commentId,
+                postId = args.postId,
+                userId = args.userId,
+                content = args.content,
+                onBackClick = onNavigationUp,
+            )
         }
     }
+}
+
+fun NavController.navigateToEditComment(
+    commentId: String,
+    postId: String,
+    userId: String,
+    content: String
+) {
+    navigate(
+        CommentEdit(
+            commentId = commentId,
+            postId = postId,
+            userId = userId,
+            content = content
+        )
+    )
 }
