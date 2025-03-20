@@ -51,7 +51,7 @@ private val typography = AppTypography(
         fontFamily = pretendardFontFamily,
         fontWeight = FontWeight.W600,
         fontSize = 22.sp,
-        lineHeight = 24.sp * lineHeightPercentage
+        lineHeight = 22.sp * lineHeightPercentage
     ),
     titleMedium = TextStyle(
         fontFamily = pretendardFontFamily,
