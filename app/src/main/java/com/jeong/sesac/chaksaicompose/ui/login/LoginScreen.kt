@@ -31,16 +31,16 @@ import com.jeong.sesac.chaksaicompose.component.custom_text_field.NicknameTF
 import com.jeong.sesac.chaksaicompose.model.UiState
 import com.jeong.sesac.chaksaicompose.ui.theme.AppTheme
 import com.jeong.sesac.chaksaicompose.validation.checkNicknameValid
-import com.jeong.sesac.chaksaicompose.viewModel.UserViewModel
-import com.jeong.sesac.chaksaicompose.viewModel.appViewModelFactory
+import com.jeong.sesac.chaksaicompose.viewmodel.UserViewModel
+import com.jeong.sesac.chaksaicompose.viewmodel.viewmodel_factory.appViewModelFactory
 import kotlinx.coroutines.delay
 
 
 @Composable
 fun LoginScreen(
     onLoginSuccess: () -> Unit,
-    viewModel: UserViewModel = viewModel(factory = appViewModelFactory)
 ) {
+    val viewModel: UserViewModel = viewModel(factory = appViewModelFactory)
     var nickname by remember { mutableStateOf("") }
     var validComment by remember { mutableStateOf("") }
     var isValidNickname by remember { mutableStateOf(false) }
@@ -49,11 +49,8 @@ fun LoginScreen(
 
     val duplicateState by viewModel.duplicateState.collectAsState()
     val userCreateState by viewModel.userCreateState.collectAsState()
-//    Log.d("nickname", "$nickname")
-
 
     fun validNickname(input: String): Boolean {
-        Log.d("input", "$input")
         return when {
             input.isEmpty() -> {
                 validComment = context.getString(R.string.blank)
